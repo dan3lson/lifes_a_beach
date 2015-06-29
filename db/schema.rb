@@ -11,27 +11,68 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629161218) do
+ActiveRecord::Schema.define(version: 20150629203434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "amenities", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "beach_amenities", force: :cascade do |t|
+    t.integer  "beach_id",   null: false
+    t.integer  "amenity_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "beaches", force: :cascade do |t|
+    t.string   "street1",                              null: false
+    t.string   "street2",                              null: false
+    t.string   "city",                                 null: false
+    t.string   "state",                                null: false
+    t.string   "zip",                                  null: false
+    t.string   "name",                                 null: false
+    t.decimal  "entrance_fee", precision: 8, scale: 2
+    t.string   "picture_url"
+    t.text     "description"
+    t.integer  "user_id",                              null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating",                  null: false
+    t.text    "description"
+    t.integer "beach_id",                null: false
+    t.integer "user_id",                 null: false
+    t.integer "score",       default: 0
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",     null: false
+    t.string   "encrypted_password",     default: "",     null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,      null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "role",                   default: "user"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "user_id",               null: false
+    t.integer "review_id",             null: false
+    t.integer "value",     default: 0
+  end
 
 end
