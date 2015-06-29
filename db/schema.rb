@@ -17,17 +17,7 @@ ActiveRecord::Schema.define(version: 20150629203434) do
   enable_extension "plpgsql"
 
   create_table "amenities", force: :cascade do |t|
-    t.boolean "dog_allowed",      default: false
-    t.boolean "volleyball_court", default: false
-    t.boolean "shower",           default: false
-    t.boolean "grill",            default: false
-    t.boolean "permit_required",  default: false
-    t.boolean "fishing",          default: false
-    t.boolean "picnic",           default: false
-    t.boolean "boardwalk",        default: false
-    t.boolean "parking",          default: false
-    t.boolean "food_vendor",      default: false
-    t.boolean "bathroom",         default: false
+    t.string "name", null: false
   end
 
   create_table "beach_amenities", force: :cascade do |t|
@@ -44,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150629203434) do
     t.string   "state",        null: false
     t.string   "zip",          null: false
     t.string   "name",         null: false
-    t.integer  "entrance_fee"
+    t.decimal  "entrance_fee"
     t.string   "picture_url"
     t.text     "description"
     t.integer  "user_id",      null: false
