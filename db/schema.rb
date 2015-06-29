@@ -28,18 +28,18 @@ ActiveRecord::Schema.define(version: 20150629203434) do
   end
 
   create_table "beaches", force: :cascade do |t|
-    t.string   "street1",      null: false
-    t.string   "street2",      null: false
-    t.string   "city",         null: false
-    t.string   "state",        null: false
-    t.string   "zip",          null: false
-    t.string   "name",         null: false
-    t.decimal  "entrance_fee"
+    t.string   "street1",                              null: false
+    t.string   "street2",                              null: false
+    t.string   "city",                                 null: false
+    t.string   "state",                                null: false
+    t.string   "zip",                                  null: false
+    t.string   "name",                                 null: false
+    t.decimal  "entrance_fee", precision: 8, scale: 2
     t.string   "picture_url"
     t.text     "description"
-    t.integer  "user_id",      null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "user_id",                              null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "reviews", force: :cascade do |t|

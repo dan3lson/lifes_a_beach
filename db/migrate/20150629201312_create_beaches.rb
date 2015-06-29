@@ -7,7 +7,7 @@ class CreateBeaches < ActiveRecord::Migration
       t.string :state, null: false
       t.string :zip, null: false
       t.string :name, null: false
-      t.decimal :entrance_fee
+      t.decimal :entrance_fee, precision: 8, scale: 2
       t.string :picture_url
       t.text :description
       t.integer :user_id, null: false
