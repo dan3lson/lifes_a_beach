@@ -1,0 +1,56 @@
+<div>
+  <% if @beach.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        Yikes! Please fix
+        <%= pluralize(@beach.errors.count, "error") %>:
+      </h2>
+      <ul>
+        <% @beach.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form_for @beach do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "Name", class: "sr-only" %>
+      <%= f.text_field :name, class: "form-control", placeholder: "Name *" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, "Description", class: "sr-only" %>
+      <%= f.text_field :description, class: "form-control", placeholder: "Description *" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :street1, "Street 1", class: "sr-only" %>
+      <%= f.text_field :street1, class: "form-control", placeholder: "Street 1 *" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :street2, "Street 2", class: "sr-only" %>
+      <%= f.text_field :street2, class: "form-control", placeholder: "Street 2" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :city, "City", class: "sr-only" %>
+      <%= f.text_field :city, class: "form-control", placeholder: "City *" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :state, "State", class: "sr-only" %>
+      <%= f.text_field :state, class: "form-control", placeholder: "State *" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :zip, "Zipcode", class: "sr-only" %>
+      <%= f.text_field :zip, class: "form-control", placeholder: "Zipcode *" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :entrance_fee, "Entrance Fee", class: "sr-only" %>
+      <%= f.text_field :entrance_fee, class: "form-control", placeholder: "Entrance Fee (xx.xx)*" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :picture_url, "Picture URL", class: "sr-only" %>
+      <%= f.text_field :picture_url, class: "form-control", placeholder: "Picture URL *" %>
+    </div>
+    <p>
+      <%= f.submit class: "btn btn-default form-control" %>
+    </p>
+  <% end %>
+</div>
