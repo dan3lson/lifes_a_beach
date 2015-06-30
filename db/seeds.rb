@@ -1,10 +1,10 @@
-puts "==============================================="
-puts "Creating Users"
-puts "==============================================="
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Users"
+Rails.logger.info "==============================================="
 
 user = User.create!(
   email: Faker::Internet.email,
   password: "password",
   password_confirmation: "password"
 )
-puts "User Email: #{user.email}"
+Rails.logger.info "User Email: #{user.email}"

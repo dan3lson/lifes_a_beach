@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'user edits a beach they created', %Q{
+feature 'user edits a beach they created', %{
   As a signed up user
   I want to sign in
   So that I can edit a beach I created

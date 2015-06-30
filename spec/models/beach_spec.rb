@@ -8,16 +8,18 @@ RSpec.describe Beach, type: :model do
     it { should validate_presence_of(:city) }
     it { should validate_presence_of(:state) }
     it { should validate_presence_of(:zip) }
-    subject { Beach.new(
-      street1: "street1",
-      city: "city",
-      state: "state",
-      zip: "zip",
-      entrance_fee: 3.33,
-      picture_url: "picture_url",
-      description: "description",
-      user_id: 1
-    )}
+    subject {
+      Beach.new(
+        street1: "street1",
+        city: "city",
+        state: "state",
+        zip: "zip",
+        entrance_fee: 3.33,
+        picture_url: "picture_url",
+        description: "description",
+        user_id: 1
+      )
+    }
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
     it { should validate_presence_of(:entrance_fee) }

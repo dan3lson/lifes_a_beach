@@ -52,6 +52,7 @@ class BeachesController < ApplicationController
   end
 
   private
+  
   def beach_params
     params.require(:beach).permit(
       :name,

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "user deletes an existing beach", %Q{
+feature "user deletes an existing beach", %{
   As a user,
   I want to delete one of
   my beaches.
