@@ -1,0 +1,35 @@
+<h1>
+  <%= @beach.name %>
+</h1>
+<p>
+    <%= @beach.description %>
+</p>
+<p>
+    <%= @beach.street1 %>
+</p>
+<p>
+    <%= @beach.street2 %>
+</p>
+<p>
+    <%= @beach.city %>
+</p>
+<p>
+    <%= @beach.state %>
+</p>
+<p>
+    <%= @beach.zip %>
+</p>
+<p>
+    <%= @beach.entrance_fee %>
+</p>
+<p>
+    <%= @beach.picture_url %>
+</p>
+
+<%= link_to "All Beaches", beaches_path %>
+<br/>
+<%= link_to "Delete Beach", beach_path(@beach),
+  class: "btn btn-small btn-danger form-control",
+  # Why does this delete-alert pop up twice?
+  method: :delete, data: { confirm: "Are you sure?" }
+%>
