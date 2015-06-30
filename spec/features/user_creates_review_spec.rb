@@ -46,7 +46,7 @@ feature 'user creates a review', %{
 
     visit root_path
 
-    login_as(user, :scope => :user, :run_callbacks => false)
+    login_as(user, scope: :user, run_callbacks: false)
 
     visit new_beach_review_path(beach)
 
@@ -59,7 +59,6 @@ feature 'user creates a review', %{
     select 'Great - 5', from: 'Rating'
     fill_in "Description", with: "Best beach ever"
     click_button "Submit"
-    save_and_open_page
 
     expect(page).to have_content("User can only submit one review for a beach.")
   end

@@ -18,5 +18,12 @@
 # t.boolean :food_vendor, default: false
 # t.boolean :bathroom, default: false
 
-Beach.find_or_create_by!(street1: "123 Beach Drive", street2: "Apt. 5",
-  city: "Boston", state: "MA", zip: "01234", name: "Tom Ford Beach", user_id: 1)
+Beach.find_or_create_by!(
+  street1: "123 Beach Drive",
+  street2: "Apt. 5",
+  city: "Boston",
+  state: "MA",
+  zip: "01234",
+  name: "Tom Ford Beach",
+  user_id: 1
+)
