@@ -25,6 +25,12 @@
 <p>
     <%= @beach.picture_url %>
 </p>
+<p>
+    <% @beach.amenities.each do |amenity| %>
+      <%= amenity.name %>
+      <br/>
+    <% end %>
+</p>
 
 <%= link_to "All Beaches", beaches_path %>
 <br/>

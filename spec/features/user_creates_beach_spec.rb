@@ -27,6 +27,7 @@ feature 'user creates a new beach', %{
       fill_in "Zipcode", with: "zip"
       fill_in "Entrance Fee", with: 3.33
       fill_in "Picture URL", with: "picture_url"
+      select "Showers", from: "Amenities"
       click_on "Create Beach"
 
       expect(page).to have_content("Beach created successfully")

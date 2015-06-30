@@ -4,29 +4,8 @@
   <p>
     <%= link_to beach.name, beach_path(beach) %>
   </p>
-  <p>
-      <%= beach.description %>
-  </p>
-  <p>
-      <%= beach.street1 %>
-  </p>
-  <p>
-      <%= beach.street2 %>
-  </p>
-  <p>
-      <%= beach.city %>
-  </p>
-  <p>
-      <%= beach.state %>
-  </p>
-  <p>
-      <%= beach.zip %>
-  </p>
-  <p>
-      <%= beach.entrance_fee %>
-  </p>
-  <p>
-      <%= beach.picture_url %>
-  </p>
   <hr>
 <% end %>
+<p>
+  <%= link_to "Create Beach", new_beach_path %>
+</p>

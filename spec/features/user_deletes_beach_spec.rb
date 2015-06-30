@@ -7,15 +7,7 @@ feature "user deletes an existing beach", %{
 } do
 
   scenario "\n delete beach from its show page" do
-
     user = FactoryGirl.create(:user)
-
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
 
     beach = Beach.create!(
       name: "Launch Academy",
@@ -29,9 +21,22 @@ feature "user deletes an existing beach", %{
       user: user
     )
 
+    amenity = Amenity.create!(name: "Capybaras Allowed")
+    BeachAmenity.create!(beach: beach, amenity: amenity)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_button 'Log in'
+
     visit beach_path(beach)
+
     click_on "Delete Beach"
+
     expect(page).to have_content("Beach deleted successfully.")
     expect(Beach.count).to eq(0)
+    expect(BeachAmenity.count).to eq(0)
   end
 end
