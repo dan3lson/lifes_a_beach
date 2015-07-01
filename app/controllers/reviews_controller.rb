@@ -25,9 +25,8 @@ class ReviewsController < ApplicationController
 
   def update
     @beach = Beach.find(params[:beach_id])
-    @user = current_user
     @review = Review.find(params[:id])
-    @review.user = @user
+    @review.user = current_user
     if @review.update(review_params)
       flash[:notice] = "Review updated successfully."
       redirect_to beach_path(@beach)
@@ -41,8 +40,6 @@ class ReviewsController < ApplicationController
   def destroy
     @beach = Beach.find(params[:beach_id])
     @review = Review.find(params[:id])
-    @user = current_user
-    @review.user = @user
     if @review.destroy
       flash[:success] = "Review deleted successfully."
       redirect_to beach_path(@beach)

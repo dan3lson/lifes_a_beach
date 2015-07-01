@@ -7,9 +7,9 @@ feature "user deletes an existing beach", %{
 } do
 
   scenario "\n delete beach from its show page" do
-    user = FactoryGirl.create(:user)
-    beach = FactoryGirl.create(:beach, user: user)
-    FactoryGirl.create(:review, beach: beach, user: user)
+    review = FactoryGirl.create(:review)
+    beach = review.beach
+    user = beach.user
 
     visit new_user_session_path
 

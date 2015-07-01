@@ -8,9 +8,9 @@ feature 'user edits a review they created', %{
 
   describe 'user edits review' do
     scenario "all input fields are valid" do
-      user = FactoryGirl.create(:user)
-      beach = FactoryGirl.create(:beach, user: user)
-      review = FactoryGirl.create(:review, beach: beach, user: user)
+      review = FactoryGirl.create(:review)
+      beach = review.beach
+      user = beach.user
 
       visit new_user_session_path
 
@@ -30,9 +30,9 @@ feature 'user edits a review they created', %{
     end
 
     scenario "all input fields are invalid" do
-      user = FactoryGirl.create(:user)
-      beach = FactoryGirl.create(:beach, user: user)
-      review = FactoryGirl.create(:review, beach: beach, user: user)
+      review = FactoryGirl.create(:review)
+      beach = review.beach
+      user = beach.user
 
       visit new_user_session_path
 
