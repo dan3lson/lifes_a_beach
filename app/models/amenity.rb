@@ -5,8 +5,6 @@ class Amenity < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def self.all_names
-    amenities = []
-    self.all.each { |a| amenities << a.name }
-    amenities
+    self.all.map { |amenity| amenity.name }
   end
 end

@@ -29,5 +29,3 @@ FactoryGirl.define do
     amenity
   end
 end
-
-create_list(:amenity, 5)

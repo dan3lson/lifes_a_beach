@@ -20,6 +20,7 @@ RSpec.describe Amenity, type: :model do
 
   describe "#Amenity#all_names" do
     it "returns all amenity names" do
+      FactoryGirl.create_list(:amenity, 10)
       expect(Amenity.all_names.count).to eq(10)
     end
   end
