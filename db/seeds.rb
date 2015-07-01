@@ -2,23 +2,34 @@ Rails.logger.info "==============================================="
 Rails.logger.info "Creating Users"
 Rails.logger.info "==============================================="
 
-Beach.find_or_create_by!(
-  street1: "123 Beach Drive",
-  street2: "Apt. 5",
-  city: "Boston",
-  state: "MA",
-  zip: "01234",
-  name: "Tom Ford Beach",
-  user_id: 1
-)
+6.times do
+  user = User.create!(
+    email: Faker::Internet.email,
+    password: "password",
+    password_confirmation: "password"
+  )
+  Rails.logger.info "User Email: #{user.email}"
+end
 
-user = User.create!(
-  email: Faker::Internet.email,
-  password: "password",
-  password_confirmation: "password"
-)
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Beaches"
+Rails.logger.info "==============================================="
 
-Rails.logger.info "User Email: #{user.email}"
+30.times do
+  beach = Beach.create!(
+    name: Faker::Company.name,
+    street1: Faker::Address.street_name,
+    street2: Faker::Address.secondary_address,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    zip: Faker::Address.zip_code,
+    user: User.all.sample,
+    entrance_fee: 6.50,
+    description: Faker::Lorem.sentence,
+    picture_url: Faker::Lorem.sentence
+  )
+  Rails.logger.info "Beach name: #{beach.name}"
+end
 
 Rails.logger.info "==============================================="
 Rails.logger.info "Creating Amenities"
@@ -37,3 +48,40 @@ amenities = [
   Amenity.create!(name: "Bathrooms")
 ]
 amenities.each { |amenity| Rails.logger.info "Amentity: #{amenity.name}" }
+
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Reviews"
+Rails.logger.info "==============================================="
+
+1.times do
+  Review.create!(
+    rating: rand(1..5),
+    user: User.first,
+    beach: Beach.first,
+    description: Faker::Lorem.sentence
+  )
+end
+
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Upvotes"
+Rails.logger.info "==============================================="
+
+56.times do
+  Upvote.create!(
+    value: 1,
+    user: User.all.sample,
+    review: Review.all.sample,
+  )
+end
+
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Downvotes"
+Rails.logger.info "==============================================="
+
+56.times do
+  Downvote.create!(
+    value: -1,
+    user: User.all.sample,
+    review: Review.all.sample,
+  )
+end

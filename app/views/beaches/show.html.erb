@@ -33,9 +33,13 @@
 </p>
 
 <% @reviews.each do |review| %>
+  <%= link_to "Review Show Page", review_path(review) %>
   <%= review.rating %>
   <%= review.description %>
+  <%= link_to "Upvote", new_review_upvote_path(review) %>
 <% end %>
+
+<hr/>
 
 <%= link_to "All Beaches", beaches_path %>
 <br/>

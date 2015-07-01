@@ -2,7 +2,7 @@ require 'factory_girl'
 
 FactoryGirl.define do
   factory :user do
-    sequence(:email) {|n| "user#{n}@example.com" }
+    sequence(:email) { |n| "user#{n}@example.com" }
     password 'password'
     password_confirmation 'password'
   end
@@ -13,7 +13,7 @@ FactoryGirl.define do
     city "Boston"
     state "MA"
     zip "02155"
-    sequence(:name) {|n| "Launch Beach#{n}" }
+    sequence(:name) { |n| "Launch Beach#{n}" }
     entrance_fee 13.33
     picture_url "http://www.google.com"
     description "Best beach ever."
@@ -21,7 +21,7 @@ FactoryGirl.define do
   end
 
   factory :amenity do
-    sequence(:name) {|n| "Dogs Allowed #{n}" }
+    sequence(:name) { |n| "Dogs Allowed #{n}" }
   end
 
   factory :beach_amenity do
@@ -38,4 +38,17 @@ FactoryGirl.define do
     beach
   end
 
+  factory :upvote do
+    value 1
+
+    review
+    user
+  end
+
+  factory :downvote do
+    value (-1)
+
+    review
+    user
+  end
 end
