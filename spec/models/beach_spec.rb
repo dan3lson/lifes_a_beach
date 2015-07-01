@@ -25,7 +25,7 @@ RSpec.describe Beach, type: :model do
     it { should validate_presence_of(:entrance_fee) }
     it { should validate_presence_of(:picture_url) }
     it { should validate_presence_of(:description) }
-    it { should validate_presence_of(:user) }
+    it { should validate_presence_of(:user_id) }
   end
 
   describe "initialization" do

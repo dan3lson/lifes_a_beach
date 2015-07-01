@@ -12,5 +12,5 @@ class Beach < ActiveRecord::Base
   validates :entrance_fee, presence: true
   validates :picture_url, presence: true
   validates :description, presence: true
-  validates :user, presence: true
+  validates :user_id, presence: true
 end

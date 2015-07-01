@@ -33,8 +33,15 @@
 </p>
 
 <% @reviews.each do |review| %>
-  <%= review.rating %>
-  <%= review.description %>
+  <li><%= review.rating %></li>
+  <% unless review.description.nil? %>
+    <li><%= review.description %></li>
+  <% end %>
+  <li><%= link_to "Delete Review", "/beaches/#{@beach.id}/reviews/#{review.id}",
+    class: "btn btn-small btn-danger form-control",
+    # Why does this delete-alert pop up twice?
+    method: :delete, data: { confirm: "Are you sure?" }
+  %></li>
 <% end %>
 
 <%= link_to "All Beaches", beaches_path %>
