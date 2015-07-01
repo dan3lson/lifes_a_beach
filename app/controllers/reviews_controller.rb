@@ -32,7 +32,8 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Review updated successfully."
       redirect_to beach_path(@beach)
     else
-      flash.now[:notice] = "Review not updated successfully. " + @review.errors.full_messages.join(". ")
+      flash.now[:notice] = "Review not updated successfully. " +
+                            @review.errors.full_messages.join(". ")
       render :edit
     end
   end
