@@ -19,4 +19,13 @@ FactoryGirl.define do
     description "Best beach ever."
     user
   end
+
+  factory :amenity do
+    sequence(:name) {|n| "Dogs Allowed #{n}" }
+  end
+
+  factory :beach_amenity do
+    beach
+    amenity
+  end
 end

@@ -10,7 +10,7 @@ feature 'user creates a new beach', %{
     scenario "all input fields are valid" do
 
       user = FactoryGirl.create(:user)
-
+      amenities = FactoryGirl.create_list(:amenity, 5)
       visit new_user_session_path
 
       fill_in 'Email', with: user.email
@@ -27,6 +27,7 @@ feature 'user creates a new beach', %{
       fill_in "Zipcode", with: "zip"
       fill_in "Entrance Fee", with: 3.33
       fill_in "Picture URL", with: "picture_url"
+      select amenities.first.name, from: "amenities"
       click_on "Create Beach"
 
       expect(page).to have_content("Beach created successfully")

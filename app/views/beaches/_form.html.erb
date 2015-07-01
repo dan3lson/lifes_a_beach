@@ -49,6 +49,15 @@
       <%= f.label :picture_url, "Picture URL", class: "sr-only" %>
       <%= f.text_field :picture_url, class: "form-control", placeholder: "Picture URL *" %>
     </div>
+    <div class="form-group">
+      <%= label_tag :amenities, "Amenities", class: "sr-only" %>
+      <%=
+        select_tag :amenities,
+        options_for_select(@amenities, include_blank: true),
+        class: "form-control",
+        placeholder: "Amenities *"
+      %>
+    </div>
     <p>
       <%= f.submit class: "btn btn-default form-control" %>
     </p>
