@@ -13,7 +13,7 @@ FactoryGirl.define do
     city "Boston"
     state "MA"
     zip "02155"
-    name "Launch Beach"
+    sequence(:name) {|n| "Launch Beach#{n}" }
     entrance_fee 13.33
     picture_url "http://www.google.com"
     description "Best beach ever."
@@ -28,4 +28,14 @@ FactoryGirl.define do
     beach
     amenity
   end
+
+  factory :review do
+    rating 5
+    description "hella awesome"
+    score 0
+
+    user
+    beach
+  end
+
 end

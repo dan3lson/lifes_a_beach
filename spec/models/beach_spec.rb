@@ -45,7 +45,7 @@ RSpec.describe Beach, type: :model do
       expect(beach.zip).to eq("02155")
     end
     it "returns a name string" do
-      expect(beach.name).to eq("Launch Beach")
+      expect(beach.name).to include("Launch Beach")
     end
     it "returns a entrance_fee string" do
       expect(beach.entrance_fee).to eq(13.33)

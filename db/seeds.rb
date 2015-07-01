@@ -2,11 +2,22 @@ Rails.logger.info "==============================================="
 Rails.logger.info "Creating Users"
 Rails.logger.info "==============================================="
 
+Beach.find_or_create_by!(
+  street1: "123 Beach Drive",
+  street2: "Apt. 5",
+  city: "Boston",
+  state: "MA",
+  zip: "01234",
+  name: "Tom Ford Beach",
+  user_id: 1
+)
+
 user = User.create!(
   email: Faker::Internet.email,
   password: "password",
   password_confirmation: "password"
 )
+
 Rails.logger.info "User Email: #{user.email}"
 
 Rails.logger.info "==============================================="

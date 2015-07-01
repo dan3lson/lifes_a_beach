@@ -32,6 +32,11 @@
     <% end %>
 </p>
 
+<% @reviews.each do |review| %>
+  <%= review.rating %>
+  <%= review.description %>
+<% end %>
+
 <%= link_to "All Beaches", beaches_path %>
 <br/>
 <%= link_to "Delete Beach", beach_path(@beach),

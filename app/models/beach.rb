@@ -2,6 +2,7 @@ class Beach < ActiveRecord::Base
   belongs_to :user
   has_many :beach_amenities
   has_many :amenities, through: :beach_amenities
+  has_many :reviews
 
   validates :street1, presence: true
   validates :city, presence: true

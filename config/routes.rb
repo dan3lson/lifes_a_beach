@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'beaches#index'
 
-  devise_for :users
+  resources :beaches do
+    resources :reviews
+  end
 
-  resources :beaches
   resources :amenities
 end
