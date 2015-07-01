@@ -65,8 +65,8 @@ feature 'user creates a review', %{
 
   scenario 'user views multiple reviews on beaches show page' do
     beach = FactoryGirl.create(:beach)
-    review1 = FactoryGirl.create(:review)
-    review2 = FactoryGirl.create(:review)
+    review1 = FactoryGirl.create(:review, beach: beach)
+    review2 = FactoryGirl.create(:review, beach: beach)
 
     visit beach_path(beach)
 

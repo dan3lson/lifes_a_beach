@@ -1,22 +1,6 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-# t.boolean :dog_allowed, default: false
-# t.boolean :volleyball_court, default: false
-# t.boolean :shower, default: false
-# t.boolean :grill, default: false
-# t.boolean :permit_required, default: false
-# t.boolean :fishing, default: false
-# t.boolean :picnic, default: false
-# t.boolean :boardwalk, default: false
-# t.boolean :parking, default: false
-# t.boolean :food_vendor, default: false
-# t.boolean :bathroom, default: false
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Users"
+Rails.logger.info "==============================================="
 
 Beach.find_or_create_by!(
   street1: "123 Beach Drive",
@@ -27,3 +11,29 @@ Beach.find_or_create_by!(
   name: "Tom Ford Beach",
   user_id: 1
 )
+
+user = User.create!(
+  email: Faker::Internet.email,
+  password: "password",
+  password_confirmation: "password"
+)
+
+Rails.logger.info "User Email: #{user.email}"
+
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Amenities"
+Rails.logger.info "==============================================="
+
+amenities = [
+  Amenity.create!(name: "Dogs Allowed"),
+  Amenity.create!(name: "Volleyball Courts"),
+  Amenity.create!(name: "Showers"),
+  Amenity.create!(name: "Grills"),
+  Amenity.create!(name: "Permit Required"),
+  Amenity.create!(name: "Fishing"),
+  Amenity.create!(name: "Boardwalk"),
+  Amenity.create!(name: "Parking"),
+  Amenity.create!(name: "Food Vvendors"),
+  Amenity.create!(name: "Bathrooms")
+]
+amenities.each { |amenity| Rails.logger.info "Amentity: #{amenity.name}" }

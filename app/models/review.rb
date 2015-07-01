@@ -6,7 +6,7 @@ class Review < ActiveRecord::Base
   validates :user_id, presence: true
   validates :beach_id, presence: true
   validates :user_id, uniqueness: {
-    scope: :beach_id,
+    scope: :beach,
     message: "can only submit one review for a beach."
   }
 end

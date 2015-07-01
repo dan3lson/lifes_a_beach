@@ -1,0 +1,11 @@
+<h1>Beaches</h1>
+
+<% @beaches.each do |beach| %>
+  <p>
+    <%= link_to beach.name, beach_path(beach) %>
+  </p>
+  <hr>
+<% end %>
+<p>
+  <%= link_to "Create Beach", new_beach_path %>
+</p>
