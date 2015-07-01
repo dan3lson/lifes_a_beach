@@ -1,4 +1,6 @@
 class BeachesController < ApplicationController
+  before_action :authorize_user, except: [:index, :show]
+
   def new
     @beach = Beach.new
     @amenities = Amenity.all_names
@@ -75,5 +77,11 @@ class BeachesController < ApplicationController
       :entrance_fee,
       :picture_url
     )
+  end
+
+  def authorize_user
+    if !user_signed_in?
+      raise ActionController::RoutingError.new("Not Found")
+    end
   end
 end

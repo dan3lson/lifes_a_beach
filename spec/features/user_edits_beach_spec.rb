@@ -45,7 +45,15 @@ feature 'user edits a beach they created', %{
     end
 
     scenario "all input fields are invalid" do
-      # Test pass -- why don't we need to sign in first?
+      beach = FactoryGirl.create(:beach)
+      user = beach.user
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
 
       visit edit_beach_path(beach)
 

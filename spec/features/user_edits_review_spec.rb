@@ -8,9 +8,9 @@ feature 'user edits a review they created', %{
 
   describe 'user edits review' do
     scenario "all input fields are valid" do
-      review = FactoryGirl.create(:review)
+      user = FactoryGirl.create(:user)
+      review = FactoryGirl.create(:review, user: user)
       beach = review.beach
-      user = beach.user
 
       visit new_user_session_path
 
@@ -18,8 +18,8 @@ feature 'user edits a review they created', %{
       fill_in 'Password', with: user.password
 
       click_button 'Log in'
-
-      visit edit_beach_review_path(beach, review)
+      click_link beach.name
+      click_link 'Edit Review'
 
       select 'Good - 4', from: 'Rating'
       fill_in "Description", with: "Da best beach ever"
@@ -30,9 +30,9 @@ feature 'user edits a review they created', %{
     end
 
     scenario "all input fields are invalid" do
-      review = FactoryGirl.create(:review)
+      user = FactoryGirl.create(:user)
+      review = FactoryGirl.create(:review, user: user)
       beach = review.beach
-      user = beach.user
 
       visit new_user_session_path
 
@@ -40,8 +40,8 @@ feature 'user edits a review they created', %{
       fill_in 'Password', with: user.password
 
       click_button 'Log in'
-
-      visit edit_beach_review_path(beach, review)
+      click_link beach.name
+      click_link 'Edit Review'
 
       select '', from: 'Rating'
       fill_in "Description", with: "Da best beach ever"
@@ -50,6 +50,23 @@ feature 'user edits a review they created', %{
       expect(page).to_not have_content("Review updated successfully")
       expect(page).to have_content("Review not updated successfully")
       expect(page).to have_content("can\'t be blank")
+    end
+
+    scenario "user attempts to edit someone else's review" do
+      review = FactoryGirl.create(:review)
+      beach = review.beach
+      user2 = FactoryGirl.create(:user)
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: user2.email
+      fill_in 'Password', with: user2.password
+
+      click_button 'Log in'
+
+      click_link beach.name
+
+      expect(page.has_selector?('form')).to be(false)
     end
   end
 end

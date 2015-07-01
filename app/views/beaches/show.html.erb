@@ -37,6 +37,7 @@
   <% unless review.description.nil? %>
     <li><%= review.description %></li>
   <% end %>
+  <li><%= link_to "Edit Review", edit_beach_review_path(@beach, review)%></li>
   <li><%= link_to "Delete Review", "/beaches/#{@beach.id}/reviews/#{review.id}",
     class: "btn btn-small btn-danger form-control",
     # Why does this delete-alert pop up twice?
