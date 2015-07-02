@@ -44,6 +44,14 @@ feature 'user creates a new beach', %{
     end
 
     scenario "all input fields are invalid" do
+      user = FactoryGirl.create(:user)
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
+
       visit new_beach_path
       fill_in "Name", with: ""
       fill_in "Description", with: ""
@@ -59,6 +67,12 @@ feature 'user creates a new beach', %{
       expect(page).to have_content("Beach not created successfully")
       expect(page).to have_content("error")
       expect(Beach.count).to eq(0)
+    end
+
+    scenario "unauthenticated user attempts to create a beach" do
+      visit root_path
+
+      expect(page).to_not have_content("Create Beach")
     end
   end
 end

@@ -10,8 +10,8 @@ feature 'user edits a beach they created', %{
 
   describe 'user edits beach' do
     scenario "all input fields are valid" do
-
-      user = FactoryGirl.create(:user)
+      beach
+      user = beach.user
 
       visit new_user_session_path
 
@@ -20,7 +20,8 @@ feature 'user edits a beach they created', %{
 
       click_button 'Log in'
 
-      visit edit_beach_path(beach)
+      click_link beach.name
+      click_link 'Update Beach'
 
       fill_in "Name", with: "new Launch Academy"
       fill_in "Description", with: "new description"
@@ -45,9 +46,17 @@ feature 'user edits a beach they created', %{
     end
 
     scenario "all input fields are invalid" do
-      # Test pass -- why don't we need to sign in first?
+      user = beach.user
 
-      visit edit_beach_path(beach)
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
+
+      click_link beach.name
+      click_link 'Update Beach'
 
       fill_in "Name", with: ""
       fill_in "Description", with: ""
@@ -62,6 +71,56 @@ feature 'user edits a beach they created', %{
       expect(page).to_not have_content("Beach updated successfully")
       expect(page).to have_content("Beach not updated successfully")
       expect(page).to have_content("error")
+    end
+
+    scenario "user attempts to edit beach they created" do
+      beach
+      user = beach.user
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
+
+      click_link beach.name
+
+      expect(page).to have_content('Update Beach')
+      expect(page).to have_content('Delete Beach')
+    end
+
+    scenario "user attempts to edit beach created by another user" do
+      beach
+      user = FactoryGirl.create(:user)
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
+
+      click_link beach.name
+
+      expect(page).to_not have_content('Update Beach')
+      expect(page).to_not have_content('Delete Beach')
+    end
+
+    scenario "malicious user attempts to edit someone else's review" do
+      beach
+      user = FactoryGirl.create(:user)
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
+
+      visit edit_beach_path(beach)
+
+      expect(page.has_selector?('form')).to be(false)
     end
   end
 end

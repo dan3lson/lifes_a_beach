@@ -1,3 +1,4 @@
-<h1>Edit Beach</h1>
-
-<%= render "form" %>
+<% if user_signed_in? && @review.user == current_user %>
+  <h1>Edit Beach</h1>
+  <%= render "form" %>
+<% end %>
