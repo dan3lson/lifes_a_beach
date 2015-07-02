@@ -1,6 +1,19 @@
 class BeachesController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
 
+  def index
+    if params[:query] == nil
+      @beaches = Beach.all
+    elsif params[:query].split.size == 1
+      @beaches = Beach.where("name ILIKE '%#{params[:query]}%' OR description ILIKE '%#{params[:query]}%'")
+    elsif params[:query].split.size >= 2
+      split_query = params[:query].split
+      mapped_split_query = split_query.map { |word| "(name ILIKE '%#{word}%' OR description ILIKE '%#{word}%') AND " }
+      formatted_query = mapped_split_query.inject(:+).rpartition(" AND ").first
+      @beaches = Beach.where(formatted_query)
+    end
+  end
+
   def new
     @beach = Beach.new
     @amenities = Amenity.all_names
@@ -21,10 +34,6 @@ class BeachesController < ApplicationController
       flash.now[:notice] = "Beach not created successfully."
       render :new
     end
-  end
-
-  def index
-    @beaches = Beach.all
   end
 
   def show

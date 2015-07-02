@@ -102,7 +102,7 @@ feature 'user edits a review they created', %{
 
       visit edit_beach_review_path(beach, review)
 
-      expect(page.has_selector?('form')).to be(false)
+      expect(page).to_not have_content("Rating")
     end
   end
 end

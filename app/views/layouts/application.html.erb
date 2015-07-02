@@ -16,6 +16,14 @@
 
     <section class="top-bar-section">
       <ul class="right">
+        <li>
+          <%= form_tag("/", method: "get") do %>
+          <%= text_field_tag(:query, nil, required: true) %>
+        </li>
+        <li>
+          <%= submit_tag("Search") %>
+          <% end %>
+        </li>
         <%- if current_user -%>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
           <li><%= link_to "Change Account Information", edit_user_registration_path %></li>
