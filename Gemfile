@@ -28,3 +28,5 @@ group :development, :test do
 end
 
 gem 'coveralls', group: [:test], require: false
+
+ruby "2.2.2"
