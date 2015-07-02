@@ -1,3 +1,4 @@
-<h1>New Beach</h1>
-
-<%= render "form" %>
+<% if user_signed_in? %>
+  <h1>New Beach</h1>
+  <%= render "form" %>
+<% end %>

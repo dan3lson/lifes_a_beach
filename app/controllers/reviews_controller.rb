@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :authorize_user, except: [:index, :show]
+
   def new
     @beach = Beach.find(params[:beach_id])
     @review = Review.new
@@ -59,5 +61,11 @@ class ReviewsController < ApplicationController
       :user_id,
       :score
     )
+  end
+
+  def authorize_user
+    if !user_signed_in? && current_user != Review.find(params[:id]).user
+      raise ActionController::RoutingError.new("Not Found")
+    end
   end
 end

@@ -12,17 +12,46 @@ feature 'user creates a review', %{
   #     form page rerenders
   # [x] If there's more than one review, show a list
 
-  scenario 'user visits new review page for a beach' do
+  scenario 'authenticated user visits attempts to add a review' do
     beach = FactoryGirl.create(:beach)
-    visit new_beach_review_path(beach)
+    user = beach.user
 
-    expect(page.has_selector?("form")).to be(true)
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_button 'Log in'
+
+    click_link beach.name
+
+    expect(page).to have_content("Add a Review")
+  end
+
+  scenario 'unauthenticated user attempts to add a review' do
+    beach = FactoryGirl.create(:beach)
+
+    visit root_path
+
+    click_link beach.name
+
+    expect(page).to_not have_content("Add a Review")
   end
 
   scenario 'user submits new review for a beach' do
     beach = FactoryGirl.create(:beach)
-    FactoryGirl.create(:user)
-    visit new_beach_review_path(beach)
+    user = beach.user
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_button 'Log in'
+
+    click_link beach.name
+
+    click_link 'Add a Review'
 
     select 'Great - 5', from: 'Rating'
     fill_in "Description", with: "Best beach ever"
@@ -33,8 +62,18 @@ feature 'user creates a review', %{
 
   scenario 'user submits incomplete information for a review for a beach' do
     beach = FactoryGirl.create(:beach)
-    FactoryGirl.create(:user)
-    visit new_beach_review_path(beach)
+    user = beach.user
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_button 'Log in'
+
+    click_link beach.name
+
+    click_link 'Add a Review'
 
     click_button "Submit"
     expect(page).to have_content("can\'t be blank")
