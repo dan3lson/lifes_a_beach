@@ -45,7 +45,6 @@ feature 'user creates a new beach', %{
 
     scenario "all input fields are invalid" do
       user = FactoryGirl.create(:user)
-      amenities = FactoryGirl.create_list(:amenity, 5)
       visit new_user_session_path
 
       fill_in 'Email', with: user.email

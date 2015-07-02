@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def admin?
-     role == "admin"
+    role == "admin"
   end
 
   has_many :reviews

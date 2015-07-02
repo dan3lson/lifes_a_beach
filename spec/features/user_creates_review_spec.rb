@@ -30,7 +30,6 @@ feature 'user creates a review', %{
 
   scenario 'unauthenticated user attempts to add a review' do
     beach = FactoryGirl.create(:beach)
-    user = beach.user
 
     visit root_path
 
