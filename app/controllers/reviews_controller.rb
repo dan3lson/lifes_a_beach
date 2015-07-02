@@ -64,7 +64,7 @@ class ReviewsController < ApplicationController
   end
 
   def authorize_user
-    if !user_signed_in? && Review.find(params[:id]).user != current_user
+    if !user_signed_in? && current_user != Review.find(params[:id]).user
       raise ActionController::RoutingError.new("Not Found")
     end
   end

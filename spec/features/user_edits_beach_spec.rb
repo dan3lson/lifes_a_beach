@@ -11,7 +11,7 @@ feature 'user edits a beach they created', %{
   describe 'user edits beach' do
     scenario "all input fields are valid" do
 
-      user = FactoryGirl.create(:user)
+      user = beach.user
 
       visit new_user_session_path
 
@@ -45,7 +45,6 @@ feature 'user edits a beach they created', %{
     end
 
     scenario "all input fields are invalid" do
-      beach = FactoryGirl.create(:beach)
       user = beach.user
 
       visit new_user_session_path
@@ -70,6 +69,22 @@ feature 'user edits a beach they created', %{
       expect(page).to_not have_content("Beach updated successfully")
       expect(page).to have_content("Beach not updated successfully")
       expect(page).to have_content("error")
+    end
+
+    scenario "user attempts to edit someone else's beach" do
+      beach
+      user = FactoryGirl.create(:user)
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
+
+      click_link beach.name
+
+      expect(page.has_selector?('form')).to be(false)
     end
   end
 end

@@ -1,4 +1,4 @@
-<% if user_signed_in? %>
+<% if user_signed_in? && @beach.user == current_user %>
   <h1>Edit Beach</h1>
   <%= render "form" %>
 <% end %>
