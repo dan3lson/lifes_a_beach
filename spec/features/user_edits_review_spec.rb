@@ -52,7 +52,43 @@ feature 'user edits a review they created', %{
       expect(page).to have_content("can\'t be blank")
     end
 
-    scenario "user attempts to edit someone else's review" do
+    scenario "user attempts to edit review they created" do
+      user = FactoryGirl.create(:user)
+      review = FactoryGirl.create(:review, user: user)
+      beach = review.beach
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
+
+      click_link beach.name
+
+      expect(page).to have_content('Edit Review')
+      expect(page).to have_content('Delete Review')
+    end
+
+    scenario "user attempts to edit review created by another user" do
+      user = FactoryGirl.create(:user)
+      review = FactoryGirl.create(:review)
+      beach = review.beach
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
+
+      click_link beach.name
+
+      expect(page).to_not have_content('Edit Review')
+      expect(page).to_not have_content('Delete Review')
+    end
+
+    scenario "malicious user attempts to edit someone else's review" do
       review = FactoryGirl.create(:review)
       beach = review.beach
       user2 = FactoryGirl.create(:user)
@@ -64,7 +100,7 @@ feature 'user edits a review they created', %{
 
       click_button 'Log in'
 
-      click_link beach.name
+      visit edit_beach_review_path(beach, review)
 
       expect(page.has_selector?('form')).to be(false)
     end

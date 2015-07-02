@@ -10,7 +10,7 @@ feature 'user edits a beach they created', %{
 
   describe 'user edits beach' do
     scenario "all input fields are valid" do
-
+      beach
       user = beach.user
 
       visit new_user_session_path
@@ -20,7 +20,8 @@ feature 'user edits a beach they created', %{
 
       click_button 'Log in'
 
-      visit edit_beach_path(beach)
+      click_link beach.name
+      click_link 'Update Beach'
 
       fill_in "Name", with: "new Launch Academy"
       fill_in "Description", with: "new description"
@@ -54,7 +55,8 @@ feature 'user edits a beach they created', %{
 
       click_button 'Log in'
 
-      visit edit_beach_path(beach)
+      click_link beach.name
+      click_link 'Update Beach'
 
       fill_in "Name", with: ""
       fill_in "Description", with: ""
@@ -71,7 +73,24 @@ feature 'user edits a beach they created', %{
       expect(page).to have_content("error")
     end
 
-    scenario "user attempts to edit someone else's beach" do
+    scenario "user attempts to edit beach they created" do
+      beach
+      user = beach.user
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
+
+      click_link beach.name
+
+      expect(page).to have_content('Update Beach')
+      expect(page).to have_content('Delete Beach')
+    end
+
+    scenario "user attempts to edit beach created by another user" do
       beach
       user = FactoryGirl.create(:user)
 
@@ -83,6 +102,23 @@ feature 'user edits a beach they created', %{
       click_button 'Log in'
 
       click_link beach.name
+
+      expect(page).to_not have_content('Update Beach')
+      expect(page).to_not have_content('Delete Beach')
+    end
+
+    scenario "malicious user attempts to edit someone else's review" do
+      beach
+      user = FactoryGirl.create(:user)
+
+      visit new_user_session_path
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+
+      click_button 'Log in'
+
+      visit edit_beach_path(beach)
 
       expect(page.has_selector?('form')).to be(false)
     end

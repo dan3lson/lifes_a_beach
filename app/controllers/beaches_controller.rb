@@ -80,7 +80,7 @@ class BeachesController < ApplicationController
   end
 
   def authorize_user
-    if !user_signed_in?
+    if !user_signed_in? && current_user != Beach.find(params[:id]).user
       raise ActionController::RoutingError.new("Not Found")
     end
   end

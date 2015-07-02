@@ -6,10 +6,10 @@ feature "user deletes an existing beach", %{
   So that no one can view it
 } do
 
-  scenario "\n delete beach from its show page" do
-    review = FactoryGirl.create(:review)
+  scenario "user deletes review from its show page" do
+    user = FactoryGirl.create(:user)
+    review = FactoryGirl.create(:review, user: user)
     beach = review.beach
-    user = beach.user
 
     visit new_user_session_path
 
@@ -18,28 +18,28 @@ feature "user deletes an existing beach", %{
 
     click_button 'Log in'
 
-    visit beach_path(beach)
+    click_link beach.name
 
-    click_on "Delete Review"
+    click_link "Delete Review"
 
     expect(page).to have_content("Review deleted successfully.")
     expect(Review.count).to eq(0)
   end
 
   scenario "user attempts to delete someone else's review" do
+    user = FactoryGirl.create(:user)
     review = FactoryGirl.create(:review)
     beach = review.beach
-    user2 = FactoryGirl.create(:user)
 
     visit new_user_session_path
 
-    fill_in 'Email', with: user2.email
-    fill_in 'Password', with: user2.password
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
 
     click_button 'Log in'
 
     click_link beach.name
 
-    expect(page.has_selector?('form')).to be(false)
+    expect(page).to_not have_content("Delete Review")
   end
 end

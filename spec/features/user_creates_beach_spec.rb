@@ -69,5 +69,11 @@ feature 'user creates a new beach', %{
       expect(page).to have_content("error")
       expect(Beach.count).to eq(0)
     end
+
+    scenario "unauthenticated user attempts to create a beach" do
+      visit root_path
+
+      expect(page).to_not have_content("Create Beach")
+    end
   end
 end
