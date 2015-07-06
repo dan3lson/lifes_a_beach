@@ -12,7 +12,7 @@ feature 'user upvotes on a review', %{
       beach = review.beach
       user = review.user
 
-      log_in(user)
+      sign_in(user)
 
       visit '/'
       click_on beach.name
@@ -28,7 +28,7 @@ feature 'user upvotes on a review', %{
       beach = review.beach
       user = review.user
 
-      log_in(user)
+      sign_in(user)
 
       visit '/'
       click_on beach.name

@@ -23,8 +23,7 @@ feature "user deletes an existing beach", %{
 
     amenity = Amenity.create!(name: "Capybaras Allowed")
     BeachAmenity.create!(beach: beach, amenity: amenity)
-
-    log_in(user)
+    sign_in(user)
 
     visit beach_path(beach)
 

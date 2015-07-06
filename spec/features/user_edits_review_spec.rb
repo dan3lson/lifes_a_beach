@@ -11,13 +11,8 @@ feature 'user edits a review they created', %{
       user = FactoryGirl.create(:user)
       review = FactoryGirl.create(:review, user: user)
       beach = review.beach
+      sign_in(user)
 
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
       click_link beach.name
       click_link 'Edit Review'
 
@@ -33,13 +28,8 @@ feature 'user edits a review they created', %{
       user = FactoryGirl.create(:user)
       review = FactoryGirl.create(:review, user: user)
       beach = review.beach
+      sign_in(user)
 
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
       click_link beach.name
       click_link 'Edit Review'
 
@@ -56,13 +46,7 @@ feature 'user edits a review they created', %{
       user = FactoryGirl.create(:user)
       review = FactoryGirl.create(:review, user: user)
       beach = review.beach
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
+      sign_in(user)
 
       click_link beach.name
 
@@ -74,13 +58,7 @@ feature 'user edits a review they created', %{
       user = FactoryGirl.create(:user)
       review = FactoryGirl.create(:review)
       beach = review.beach
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
+      sign_in(user)
 
       click_link beach.name
 
@@ -92,13 +70,7 @@ feature 'user edits a review they created', %{
       review = FactoryGirl.create(:review)
       beach = review.beach
       user2 = FactoryGirl.create(:user)
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user2.email
-      fill_in 'Password', with: user2.password
-
-      click_button 'Log in'
+      sign_in(user2)
 
       visit edit_beach_review_path(beach, review)
 
