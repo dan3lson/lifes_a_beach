@@ -19,8 +19,6 @@
         <li>
           <%= form_tag beaches_path, method: 'get' do %>
             <%= text_field_tag :query, params[:query], required: true %>
-        </li>
-        <li>
             <%= submit_tag "Search", name: nil %>
           <% end %>
         </li>
