@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_12factor'
+gem 'responders'
 
 group :development, :test do
   gem 'byebug'
@@ -29,4 +30,4 @@ end
 
 gem 'coveralls', group: [:test], require: false
 
-ruby "2.2.2"
+ruby "2.2.0"
