@@ -7,6 +7,8 @@
   <hr>
 <% end %>
 
+<%= paginate @beaches %>
+
 <% if user_signed_in? %>
   <p>
     <%= link_to "Create Beach", new_beach_path %>
