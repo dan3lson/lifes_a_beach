@@ -1,0 +1,12 @@
+<h1>
+  Reviews
+  <small>
+    <%= link_to "+", new_beach_review_path %>
+  </small>
+</h1>
+
+
+<% @reviews.each do |review| %>
+  <%= review.rating %>
+  <%= review.description %>
+<% end %>

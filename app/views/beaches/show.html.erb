@@ -32,27 +32,50 @@
     <% end %>
 </p>
 
-<% @reviews.each do |review| %>
-  <li><%= review.rating %></li>
-  <% unless review.description.nil? %>
-    <li><%= review.description %></li>
-  <% end %>
-  <% if user_signed_in? && review.user == current_user %>
-    <li><%= link_to "Edit Review", edit_beach_review_path(@beach, review)%></li>
-    <li><%= link_to "Delete Review", "/beaches/#{@beach.id}/reviews/#{review.id}",
-      class: "btn btn-small btn-danger form-control",
-      # Why does this delete-alert pop up twice?
-      method: :delete, data: { confirm: "Are you sure?" }
-    %></li>
-  <% end %>
-  <br>
-<% end %>
-
-<% if user_signed_in? %>
+<br/>
+<% if @reviews.first.nil? %>
   <%= link_to "Add a Review", new_beach_review_path(@beach) %>
-  <br>
-<% end %>
+<% else %>
+  <% @reviews.each do |review| %>
+    <br/>
+    Rating: <%= review.rating %>
+    <br/>
+    Description: <%= review.description %>
+    <br/>
+    Score: <%= review.score %>
+    <br/>
+    <% if user_signed_in? && review.user == current_user %>
+      <li><%= link_to "Edit Review", edit_beach_review_path(@beach, review)%></li>
+      <li><%= link_to "Delete Review", "/beaches/#{@beach.id}/reviews/#{review.id}",
+        class: "btn btn-small btn-danger form-control",
+        method: :delete, data: { confirm: "Are you sure?" }
+      %></li>
+    <% end %>
 
+    <% if user_signed_in? %>
+      <% if review.upvotes.find_by(user_id: current_user.id) %>
+        <%=
+          link_to "Delete Upvote", review_upvote_path(review, Upvote.all.first),
+          method: :delete,
+          class: "btn btn-small btn-danger form-control"
+        %>
+      <% elsif review.downvotes.find_by(user_id: current_user.id) %>
+        <%=
+          link_to "Delete Downvote", review_downvote_path(review, Downvote.all.first),
+          method: :delete,
+          class: "btn btn-small btn-danger form-control"
+        %>
+      <% else %>
+        <%= link_to "Upvote", review_upvotes_path(review), method: :post %>
+        |
+        <%= link_to "Downvote", review_downvotes_path(review), method: :post %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+
+  <hr/>
+<% end %>
 <%= link_to "All Beaches", beaches_path %>
 <% if @beach.user == current_user %>
   <br/>

@@ -2,34 +2,39 @@ Rails.logger.info "==============================================="
 Rails.logger.info "Creating Users"
 Rails.logger.info "==============================================="
 
-user = User.create!(
-  email: Faker::Internet.email,
-  password: "password",
-  password_confirmation: "password"
+6.times do
+  user = User.create!(
+    email: Faker::Internet.email,
+    password: "password",
+    password_confirmation: "password"
+  )
+  Rails.logger.info "User Email: #{user.email}"
+end
+User.create!(
+  email: "danelson@rosa.com",
+  password: "danelson",
+  password_confirmation: "danelson"
 )
 
-beach = Beach.find_or_create_by!(
-  street1: "123 Beach Drive",
-  street2: "Apt. 5",
-  city: "Boston",
-  state: "MA",
-  zip: "01234",
-  entrance_fee: 1.00,
-  picture_url: "http://www.wow.com",
-  description: "This is the best beach.",
-  name: "Tom Ford Beach",
-  user_id: user.id
-)
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Beaches"
+Rails.logger.info "==============================================="
 
-Review.find_or_create_by!(
-  rating: 5,
-  description: "cool spot",
-  beach_id: beach.id,
-  user_id: user.id,
-  score: 0
-)
-
-Rails.logger.info "User Email: #{user.email}"
+30.times do
+  beach = Beach.create!(
+    name: Faker::Company.name,
+    street1: Faker::Address.street_name,
+    street2: Faker::Address.secondary_address,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    zip: Faker::Address.zip_code,
+    user: User.all.sample,
+    entrance_fee: 6.50,
+    description: Faker::Lorem.sentence,
+    picture_url: Faker::Lorem.sentence
+  )
+  Rails.logger.info "Beach name: #{beach.name}"
+end
 
 Rails.logger.info "==============================================="
 Rails.logger.info "Creating Amenities"
@@ -48,3 +53,16 @@ amenities = [
   Amenity.create!(name: "Bathrooms")
 ]
 amenities.each { |amenity| Rails.logger.info "Amentity: #{amenity.name}" }
+
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Reviews"
+Rails.logger.info "==============================================="
+
+1.times do
+  Review.create!(
+    rating: rand(1..5),
+    user: User.first,
+    beach: Beach.first,
+    description: Faker::Lorem.sentence,
+  )
+end
