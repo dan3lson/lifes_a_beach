@@ -11,7 +11,7 @@ feature 'admin views a list of users', %{
 
   scenario 'admin views list of all users' do
     user1 = FactoryGirl.create(:user)
-    user2 =FactoryGirl.create(:user)
+    user2 = FactoryGirl.create(:user)
     user3 = FactoryGirl.create(:user)
     admin = User.create(
       email: "admin@admin.com",
@@ -35,8 +35,8 @@ feature 'admin views a list of users', %{
 
   scenario 'user without admin role attempts to view list of all users' do
     user1 = FactoryGirl.create(:user)
-    user2 = FactoryGirl.create(:user)
-    user3 = FactoryGirl.create(:user)
+    FactoryGirl.create(:user)
+    FactoryGirl.create(:user)
 
     visit new_user_session_path
 
