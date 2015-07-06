@@ -7,7 +7,7 @@ feature 'admin views a list of users', %{
 } do
 
   # Acceptance Criteria:
-  # [ ] If a user has an admin role, they can view all users of the site
+  # [x] If a user has an admin role, they can view all users of the site
 
   scenario 'admin views list of all users' do
     user1 = FactoryGirl.create(:user)
@@ -33,7 +33,7 @@ feature 'admin views a list of users', %{
     expect(page).to have_content(user3.email)
   end
 
-  scenario 'admin views list of all users' do
+  scenario 'user without admin role attempts to view list of all users' do
     user1 = FactoryGirl.create(:user)
     user2 = FactoryGirl.create(:user)
     user3 = FactoryGirl.create(:user)
