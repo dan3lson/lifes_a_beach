@@ -36,11 +36,10 @@ feature 'user searches for a beach', %{
     )
 
     visit root_path
-    fill_in :query, with: beach1
-    save_and_open_page
-    click_button "Search"
+    fill_in "query", with: "blah"
+    click_on "Search"
 
-    expect(page).to have_content(beach1.name)
-    expect(page).to_not have_content(beach2.name)
+    expect(page).to have_content(beach2.name)
+    expect(page).to_not have_content(beach1.name)
   end
 end

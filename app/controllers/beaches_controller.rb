@@ -2,7 +2,7 @@ class BeachesController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
 
   def index
-    if params[:query] == nil
+    if params[:query] == nil || params[:query].match(/^\s*$/)
       @beaches = Beach.all
     elsif params[:query].split.size == 1
       @beaches = Beach.where("name ILIKE '%#{params[:query]}%' OR description ILIKE '%#{params[:query]}%'")
