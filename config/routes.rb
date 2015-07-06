@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :reviews, only: [:new, :create, :edit, :update, :destroy]
     end
     resources :amenities
+
+    resources :users, only: :index
   end
 
   resources :beaches, only: [:index, :show] do
