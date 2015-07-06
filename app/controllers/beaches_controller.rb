@@ -2,16 +2,7 @@ class BeachesController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
 
   def index
-    if params[:query] == nil || params[:query].match(/^\s*$/)
-      @beaches = Beach.all
-    elsif params[:query].split.size == 1
-      @beaches = Beach.where("name ILIKE '%#{params[:query]}%' OR description ILIKE '%#{params[:query]}%'")
-    elsif params[:query].split.size >= 2
-      split_query = params[:query].split
-      mapped_split_query = split_query.map { |word| "(name ILIKE '%#{word}%' OR description ILIKE '%#{word}%') AND " }
-      formatted_query = mapped_split_query.inject(:+).rpartition(" AND ").first
-      @beaches = Beach.where(formatted_query)
-    end
+    search(params[:query])
   end
 
   def new
@@ -73,6 +64,42 @@ class BeachesController < ApplicationController
   end
 
   private
+
+  def search(query)
+    if query == nil
+      @beaches = Beach.all
+    elsif query.match(/^\s*$/)
+      flash[:notice] = "Please enter one or more words to search."
+      @beaches = Beach.all
+    elsif query.split.size == 1
+      @beaches = Beach.joins(:amenities).where(
+        "beaches.name ILIKE ? OR
+        beaches.description ILIKE ? OR
+        beaches.city ILIKE ? OR
+        beaches.state ILIKE ? OR
+        beaches.zip ILIKE ? OR
+        amenities.name ILIKE ?",
+        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%",
+        "%#{query}%"
+      )
+    elsif query.split.size >= 2
+      container = []
+      split_query = query.split
+      mapped_split_query = split_query.map do |word|
+        "(beaches.name ILIKE ? OR
+        beaches.description ILIKE ? OR
+        beaches.city ILIKE ? OR
+        beaches.state ILIKE ? OR
+        beaches.zip ILIKE ? OR
+        amenities.name ILIKE ?) AND "
+      end
+
+      container << mapped_split_query.inject(:+).rpartition(" AND ").first
+      split_query.each { |word| 6.times { container << "%#{word}%" } }
+
+      @beaches = Beach.joins(:amenities).where(container.flatten)
+    end
+  end
 
   def beach_params
     params.require(:beach).permit(
