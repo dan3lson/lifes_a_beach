@@ -1,38 +1,36 @@
 class DownvotesController < ApplicationController
-  def new
-    @downvote = Downvote.new
-  end
-
   def create
-    @review = Review.find(params[:review_id])
-    @downvote = Downvote.new(downvote_params)
-    @beach = @review.beach
-    @downvote.review = @review
-    @downvote.user = current_user
-    if @downvote.save
-      flash[:notice] = "Downvote added successfully."
-      redirect_to @beach
-    else
-      flash[:notice] = "Downvote not added successfully."
-      render :new
+    if user_signed_in?
+      @review = Review.find(params[:review_id])
+      @beach = @review.beach
+      @downvote = Downvote.new(
+        review_id: @review.id,
+        user_id: current_user.id
+      )
+      @review.score -= 1
+
+      if @downvote.save && @review.save
+        flash[:notice] = "Downvote created successfully."
+        redirect_to @beach
+      else
+        flash[:notice] = "Downvote not created successfully."
+        render :new
+      end
     end
   end
 
   def destroy
-    @downvote = Downvote.find(params[:id])
-    @beach = @downvote.review.beach
-    if @downvote.destroy
+    @review = Review.find(params[:review_id])
+    @downvote = Downvote.find_by(user_id: current_user.id, review_id: @review.id)
+    @beach = @review.beach
+    @review.score += 1
+
+    if @downvote.destroy && @review.save
       flash[:notice] = "Downvote deleted successfully."
       redirect_to @beach
     else
       flash[:notice] = "Downvote not deleted."
       redirect_to @beach
     end
-  end
-
-  private
-
-  def downvote_params
-    params.require(:downvote).permit(:value)
   end
 end

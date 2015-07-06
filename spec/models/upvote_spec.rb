@@ -20,8 +20,5 @@ RSpec.describe Upvote, type: :model do
       expect(upvote.user.class).to be(User)
       expect(upvote.review.class).to be(Review)
     end
-    it "returns a value integer" do
-      expect(upvote.value).to eq(1)
-    end
   end
 end

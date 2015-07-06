@@ -20,8 +20,5 @@ RSpec.describe Downvote, type: :model do
       expect(downvote.user.class).to be(User)
       expect(downvote.review.class).to be(Review)
     end
-    it "returns a value integer" do
-      expect(downvote.value).to eq(-1)
-    end
   end
 end

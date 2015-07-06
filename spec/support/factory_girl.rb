@@ -39,15 +39,11 @@ FactoryGirl.define do
   end
 
   factory :upvote do
-    value 1
-
     review
     user
   end
 
   factory :downvote do
-    value (-1)
-
     review
     user
   end

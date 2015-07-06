@@ -10,6 +10,11 @@ Rails.logger.info "==============================================="
   )
   Rails.logger.info "User Email: #{user.email}"
 end
+User.create!(
+  email: "danelson@rosa.com",
+  password: "danelson",
+  password_confirmation: "danelson"
+)
 
 Rails.logger.info "==============================================="
 Rails.logger.info "Creating Beaches"
@@ -58,30 +63,28 @@ Rails.logger.info "==============================================="
     rating: rand(1..5),
     user: User.first,
     beach: Beach.first,
-    description: Faker::Lorem.sentence
+    description: Faker::Lorem.sentence,
   )
 end
 
-Rails.logger.info "==============================================="
-Rails.logger.info "Creating Upvotes"
-Rails.logger.info "==============================================="
-
-56.times do
-  Upvote.create!(
-    value: 1,
-    user: User.all.sample,
-    review: Review.all.sample,
-  )
-end
-
-Rails.logger.info "==============================================="
-Rails.logger.info "Creating Downvotes"
-Rails.logger.info "==============================================="
-
-56.times do
-  Downvote.create!(
-    value: -1,
-    user: User.all.sample,
-    review: Review.all.sample,
-  )
-end
+# Rails.logger.info "==============================================="
+# Rails.logger.info "Creating Upvotes"
+# Rails.logger.info "==============================================="
+#
+# 1.times do
+#   Upvote.create!(
+#     user: User.first,
+#     review: Review.all.sample,
+#   )
+# end
+#
+# Rails.logger.info "==============================================="
+# Rails.logger.info "Creating Downvotes"
+# Rails.logger.info "==============================================="
+#
+# 1.times do
+#   Downvote.create!(
+#     user: User.first,
+#     review: Review.all.sample,
+#   )
+# end
