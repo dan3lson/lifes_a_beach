@@ -21,7 +21,10 @@ class DownvotesController < ApplicationController
 
   def destroy
     @review = Review.find(params[:review_id])
-    @downvote = Downvote.find_by(user_id: current_user.id, review_id: @review.id)
+    @downvote = Downvote.find_by(
+      user_id: current_user.id,
+      review_id: @review.id
+    )
     @beach = @review.beach
     @review.score += 1
 
