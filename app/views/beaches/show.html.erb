@@ -34,8 +34,15 @@
 
 <br/>
 <% if @reviews.first.nil? %>
-  <%= link_to "Add a Review", new_beach_review_path(@beach) %>
+  No reviews exist.
+  <br/>
+  <% if user_signed_in? %>
+    <%= link_to "Add a Review", new_beach_review_path(@beach) %>
+  <% end %>
 <% else %>
+  <% if user_signed_in? %>
+    <%= link_to "Add a Review", new_beach_review_path(@beach) %>
+  <% end %>
   <% @reviews.each do |review| %>
     <br/>
     Rating: <%= review.rating %>
@@ -44,6 +51,7 @@
     <br/>
     Score: <%= review.score %>
     <br/>
+
     <% if user_signed_in? && review.user == current_user %>
       <li><%= link_to "Edit Review", edit_beach_review_path(@beach, review)%></li>
       <li><%= link_to "Delete Review", "/beaches/#{@beach.id}/reviews/#{review.id}",
