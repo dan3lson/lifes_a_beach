@@ -11,12 +11,7 @@ feature 'user creates a new beach', %{
 
       user = FactoryGirl.create(:user)
       amenities = FactoryGirl.create_list(:amenity, 5)
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
+      sign_in(user)
 
       visit new_beach_path
       fill_in "Name", with: "Launch Academy"
@@ -45,12 +40,7 @@ feature 'user creates a new beach', %{
 
     scenario "all input fields are invalid" do
       user = FactoryGirl.create(:user)
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
+      sign_in(user)
 
       visit new_beach_path
       fill_in "Name", with: ""

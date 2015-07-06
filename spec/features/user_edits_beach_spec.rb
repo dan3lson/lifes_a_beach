@@ -12,13 +12,7 @@ feature 'user edits a beach they created', %{
     scenario "all input fields are valid" do
       beach
       user = beach.user
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
+      sign_in(user)
 
       click_link beach.name
       click_link 'Update Beach'
@@ -47,13 +41,7 @@ feature 'user edits a beach they created', %{
 
     scenario "all input fields are invalid" do
       user = beach.user
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
+      sign_in(user)
 
       click_link beach.name
       click_link 'Update Beach'
@@ -76,13 +64,7 @@ feature 'user edits a beach they created', %{
     scenario "user attempts to edit beach they created" do
       beach
       user = beach.user
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
+      sign_in(user)
 
       click_link beach.name
 
@@ -93,13 +75,7 @@ feature 'user edits a beach they created', %{
     scenario "user attempts to edit beach created by another user" do
       beach
       user = FactoryGirl.create(:user)
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
+      sign_in(user)
 
       click_link beach.name
 
@@ -110,13 +86,7 @@ feature 'user edits a beach they created', %{
     scenario "malicious user attempts to edit someone else's review" do
       beach
       user = FactoryGirl.create(:user)
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
+      sign_in(user)
 
       visit edit_beach_path(beach)
 

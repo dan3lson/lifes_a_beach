@@ -15,13 +15,7 @@ feature 'user creates a review', %{
   scenario 'authenticated user visits attempts to add a review' do
     beach = FactoryGirl.create(:beach)
     user = beach.user
-
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
+    sign_in(user)
 
     click_link beach.name
 
@@ -41,13 +35,7 @@ feature 'user creates a review', %{
   scenario 'user submits new review for a beach' do
     beach = FactoryGirl.create(:beach)
     user = beach.user
-
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
+    sign_in(user)
 
     click_link beach.name
 
@@ -63,13 +51,7 @@ feature 'user creates a review', %{
   scenario 'user submits incomplete information for a review for a beach' do
     beach = FactoryGirl.create(:beach)
     user = beach.user
-
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
+    sign_in(user)
 
     click_link beach.name
 

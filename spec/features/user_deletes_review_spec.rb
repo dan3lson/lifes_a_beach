@@ -10,13 +10,7 @@ feature "user deletes an existing beach", %{
     user = FactoryGirl.create(:user)
     review = FactoryGirl.create(:review, user: user)
     beach = review.beach
-
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
+    sign_in(user)
 
     click_link beach.name
 
@@ -30,13 +24,7 @@ feature "user deletes an existing beach", %{
     user = FactoryGirl.create(:user)
     review = FactoryGirl.create(:review)
     beach = review.beach
-
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
+    sign_in(user)
 
     click_link beach.name
 

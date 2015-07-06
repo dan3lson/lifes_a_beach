@@ -14,13 +14,7 @@ feature 'user updates account information', %{
 
   scenario 'provide valid registration information' do
     user = FactoryGirl.create(:user)
-
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
+    sign_in(user)
 
     click_link 'Change Account Information'
 
@@ -37,13 +31,7 @@ feature 'user updates account information', %{
 
   scenario 'provides invalid registration information' do
     user = FactoryGirl.create(:user)
-
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
+    sign_in(user)
 
     click_link 'Change Account Information'
 

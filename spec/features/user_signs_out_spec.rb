@@ -12,14 +12,8 @@ feature 'user signs out', %{
 
   scenario 'authenticated user signs out' do
     user = FactoryGirl.create(:user)
-
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
-
+    sign_in(user)
+    
     expect(page).to have_content('Signed in successfully')
 
     click_link 'Sign Out'
