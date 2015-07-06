@@ -4,12 +4,12 @@ class CreateVotingTables < ActiveRecord::Migration
       t.integer :user_id, null: false
       t.integer :review_id, null: false
       t.integer :value, null: false, default: 1
-     end
+    end
 
     create_table :downvotes do |t|
       t.integer :user_id, null: false
       t.integer :review_id, null: false
       t.integer :value, null: false, default: -1
-     end
+    end
   end
 end
