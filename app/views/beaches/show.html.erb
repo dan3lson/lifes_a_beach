@@ -89,11 +89,12 @@
 <% if @beach.user == current_user %>
   <br/>
   <%= link_to "Update Beach", edit_beach_path(@beach) %>
+<% end %>
   <br>
+<% if (@beach.user == current_user) || (user_signed_in? && current_user.role == 'admin') %>
   <%= link_to "Delete Beach", beach_path(@beach),
     class: "btn btn-small btn-danger form-control",
     # Why does this delete-alert pop up twice?
     method: :delete, data: { confirm: "Are you sure?" }
   %>
-
 <% end %>

@@ -33,4 +33,17 @@ feature "user deletes an existing beach", %{
     expect(Beach.count).to eq(0)
     expect(BeachAmenity.count).to eq(0)
   end
+
+  scenario 'user attempts to delete a beach they did not create' do
+    user = FactoryGirl.create(:user)
+    beach = FactoryGirl.create(:beach)
+    amenity = Amenity.create!(name: "Capybaras Allowed")
+    BeachAmenity.create!(beach: beach, amenity: amenity)
+    sign_in(user)
+
+    visit beach_path(beach)
+
+    expect(page).to_not have_content("Delete Beach")
+  end
+
 end
