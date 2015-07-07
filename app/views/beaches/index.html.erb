@@ -1,11 +1,13 @@
 <h1>Beaches</h1>
 
 <% @beaches.each do |beach| %>
-  <p>
+  <div class = "beach_container">
     <%= link_to beach.name, beach_path(beach) %>
-  </p>
+  </div>
   <hr>
 <% end %>
+
+<%= paginate @beaches %>
 
 <% if user_signed_in? %>
   <p>

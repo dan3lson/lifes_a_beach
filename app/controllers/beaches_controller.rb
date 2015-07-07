@@ -23,11 +23,11 @@ class BeachesController < ApplicationController
   end
 
   def index
-    @beaches = Beach.all
+    @beaches = Beach.all.page(params[:page]).per(10)
   end
 
   def show
-    @reviews = Review.where(beach_id: @beach.id)
+    @reviews = Review.where(beach_id: @beach.id).page(params[:page]).per(2)
   end
 
   def edit

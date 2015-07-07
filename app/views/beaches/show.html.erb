@@ -79,8 +79,9 @@
         <%= link_to "Downvote", review_downvotes_path(review), method: :post %>
       <% end %>
     <% end %>
-
   <% end %>
+
+  <%= paginate @reviews %>
 
   <hr/>
 <% end %>
@@ -94,4 +95,5 @@
     # Why does this delete-alert pop up twice?
     method: :delete, data: { confirm: "Are you sure?" }
   %>
+
 <% end %>
