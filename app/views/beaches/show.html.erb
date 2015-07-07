@@ -54,7 +54,10 @@
 
     <% if user_signed_in? && review.user == current_user %>
       <li><%= link_to "Edit Review", edit_beach_review_path(@beach, review)%></li>
+    <% end %>
+    <% if (user_signed_in? && review.user == current_user) || (user_signed_in? && current_user.role == 'admin') %>
       <li><%= link_to "Delete Review", "/beaches/#{@beach.id}/reviews/#{review.id}",
+        id: "delete-review#{review.id}",
         class: "btn btn-small btn-danger form-control",
         method: :delete, data: { confirm: "Are you sure?" }
       %></li>
