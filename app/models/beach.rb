@@ -4,13 +4,14 @@ class Beach < ActiveRecord::Base
   has_many :amenities, through: :beach_amenities
   has_many :reviews, dependent: :destroy
 
+  mount_uploader :picture_url, BeachPhotoUploader
+
   validates :street1, presence: true
   validates :city, presence: true
   validates :state, presence: true
   validates :zip, presence: true
   validates :name, presence: true, uniqueness: true
   validates :entrance_fee, presence: true
-  validates :picture_url, presence: true
   validates :description, presence: true
   validates :user_id, presence: true
 end

@@ -9,6 +9,8 @@ feature 'user creates a new beach', %{
   describe 'user creates beach' do
     scenario "all input fields are valid" do
 
+      # include CarrierWaveDirect::Test::CapybaraHelpers
+
       user = FactoryGirl.create(:user)
       amenities = FactoryGirl.create_list(:amenity, 5)
       sign_in(user)
@@ -21,7 +23,8 @@ feature 'user creates a new beach', %{
       fill_in "State", with: "state"
       fill_in "Zipcode", with: "zip"
       fill_in "Entrance Fee", with: 3.33
-      fill_in "Picture URL", with: "picture_url"
+      attach_file "Picture URL", ("#{Rails.root}/spec/support/images/Plum_island.jpg")
+      # upload_directly(ImageUploader.new, "Upload Image")
       select amenities.first.name, from: "amenities"
       click_on "Create Beach"
 
@@ -33,7 +36,7 @@ feature 'user creates a new beach', %{
       expect(page).to have_content("zip")
       expect(page).to have_content("Launch Academy")
       expect(page).to have_content(3.33)
-      expect(page).to have_content("picture_url")
+      expect(page).to have_selector("img")
       expect(page).to have_content("description")
       expect(Beach.count).to eq(1)
     end
@@ -50,7 +53,6 @@ feature 'user creates a new beach', %{
       fill_in "State", with: ""
       fill_in "Zipcode", with: ""
       fill_in "Entrance Fee", with: nil
-      fill_in "Picture URL", with: ""
       click_on "Create Beach"
 
       expect(page).to_not have_content("Beach created successfully")

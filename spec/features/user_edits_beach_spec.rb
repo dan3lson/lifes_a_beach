@@ -24,7 +24,7 @@ feature 'user edits a beach they created', %{
       fill_in "State", with: "new state"
       fill_in "Zipcode", with: "new zip"
       fill_in "Entrance Fee", with: 33.33
-      fill_in "Picture URL", with: "new picture_url"
+      attach_file "Picture URL", ("#{Rails.root}/spec/support/images/Plum_island.jpg")
       click_on "Update Beach"
 
       expect(page).to have_content("Beach updated successfully")
@@ -35,7 +35,7 @@ feature 'user edits a beach they created', %{
       expect(page).to have_content("new zip")
       expect(page).to have_content("new Launch Academy")
       expect(page).to have_content(33.33)
-      expect(page).to have_content("new picture_url")
+      expect(page).to have_selector("img")
       expect(page).to have_content("new description")
     end
 
@@ -53,7 +53,6 @@ feature 'user edits a beach they created', %{
       fill_in "State", with: ""
       fill_in "Zipcode", with: ""
       fill_in "Entrance Fee", with: nil
-      fill_in "Picture URL", with: ""
       click_on "Update Beach"
 
       expect(page).to_not have_content("Beach updated successfully")

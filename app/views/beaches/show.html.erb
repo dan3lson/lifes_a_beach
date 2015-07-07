@@ -23,7 +23,7 @@
     <%= @beach.entrance_fee %>
 </p>
 <p>
-    <%= @beach.picture_url %>
+    <%= image_tag(@beach.picture_url) %>
 </p>
 <p>
     <% @beach.amenities.each do |amenity| %>
