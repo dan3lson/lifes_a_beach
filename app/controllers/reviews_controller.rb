@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:edit, :update, :destroy]
   before_action :authorize_user, except: [:index, :show]
-  respond_to :html, :js
+  respond_to :html, :json
 
   def new
     @beach = Beach.find(params[:beach_id])

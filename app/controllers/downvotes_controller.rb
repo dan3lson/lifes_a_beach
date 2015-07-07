@@ -1,4 +1,5 @@
 class DownvotesController < ApplicationController
+
   def create
     if user_signed_in?
       @review = Review.find(params[:review_id])
@@ -11,7 +12,7 @@ class DownvotesController < ApplicationController
         flash[:notice] = "Downvote created successfully."
         respond_to do |format|
            format.html { review_path(@review) }
-           format.js { render :downvote }
+           format.json { render json: downvote }
         end
       else
         flash[:notice] = "Downvote not created successfully."
@@ -31,7 +32,7 @@ class DownvotesController < ApplicationController
       flash[:notice] = "Downvote deleted successfully."
       respond_to do |format|
          format.html { review_path(@review) }
-         format.js { render :downvote }
+         format.js { render json: downvote }
       end
     else
       flash[:notice] = "Downvote not deleted."

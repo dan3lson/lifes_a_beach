@@ -1,20 +1,62 @@
-jQuery(document).ready(function($) {
-  //Tell Rails that we’re sending a JavaScript request
-  $.ajaxSetup({
-     'beforeSend': function (xhr){
-     xhr.setRequestHeader("Accept", "text/javascript")}
-  });
+jQuery(document).ready(function() {
+  $('[data-upvote-button="create"]').on('submit', function(event) {
+    event.preventDefault();
+    $form = $(event.currentTarget);
+    alert('Review upvoted!');
 
-  //General helper for forms submitted via ajax
-  $("form.upvote-submit").submit(function (){
-     $('input[type=submit]').attr('disabled', 'disabled');
-     $.post($(this).attr('action'), $(this).serialize(), null, "script");
-     return false;
-  });
+    $.ajax({
+      type: "POST",
+      url: $form.attr('action'),
+      dataType: "json",
+      success: function(upvote) {
+        // Create the String version of the form action
+        action = '/reviews/' + upvote.review_id + '/upvotes/'+ upvote.id;
 
-  $("form.downvote-submit").submit(function (){
-     $('input[type=submit]').attr('disabled', 'disabled');
-     $.post($(this).attr('action'), $(this).serialize(), null, "script");
-     return false;
+        // Create the new form
+        $newForm = $('<form>').attr({
+          action: action,
+          method: 'delete',
+          'data-upvote-button': 'delete'
+        });
+
+        // Create the new submit input
+        $upvoteButton = $('<input>').attr({type: 'submit', value: 'Remove Upvote'});
+
+        // Append the new submit input to the new form
+        $newForm.append($upvoteButton);
+
+        // Replace the old create form with the new remove form
+        $form.replaceWith($newForm);
+      }
   });
-}); //document.ready
+  $('[data-downvote-button="create"]').on('submit', function(event) {
+    event.preventDefault();
+    $form = $(event.currentTarget);
+    alert('Review downvoted!');
+
+    $.ajax({
+      type: "POST",
+      url: $form.attr('action'),
+      dataType: "json",
+      success: function(downvote) {
+        // Create the String version of the form action
+        action = '/reviews/' + downvote.review_id + '/downvotes/'+ downvote.id;
+
+        // Create the new form
+        $newForm = $('<form>').attr({
+          action: action,
+          method: 'delete',
+          'data-downvote-button': 'delete'
+        });
+
+        // Create the new submit input
+        $downvoteButton = $('<input>').attr({type: 'submit', value: 'Remove Downvote'});
+
+        // Append the new submit input to the new form
+        $newForm.append($downvoteButton);
+
+        // Replace the old create form with the new remove form
+        $form.replaceWith($newForm);
+      }
+  });
+});

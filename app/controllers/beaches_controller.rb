@@ -1,7 +1,7 @@
 class BeachesController < ApplicationController
   before_action :set_beach, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user, except: [:index, :show]
-  respond_to :html, :js
+  respond_to :html, :json
 
   def new
     @beach = Beach.new

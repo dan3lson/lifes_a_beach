@@ -36,19 +36,20 @@
     <div class='review-<%= @review.id %>' >
        <h3>Score: <%= @review.score %></h3><br/>
     </div>
+    <% if user_signed_in? %>
+      <%= button_to "Upvote", review_upvotes_path(review),
+        method: :post,
+        # This hash will add a `data-meow-button="create"` to the generated form
+        form: { data: { 'upvote-button' => 'create' } } %>
 
+      <%= button_to "Downvote", review_downvotes_path(review),
+        method: :post,
+        # This hash will add a `data-meow-button="create"` to the generated form
+        form: { data: { 'downvote-button' => 'create' } } %>
+    <% end %>
     <br/>
 
     <% if user_signed_in? && review.user == current_user %>
-      <%= form_for [review, review.upvotes.build], remote: true do |f| %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.submit 'Upvote', class: 'upvote-submit' %>
-      <% end %>
-        |
-      <%= form_for [review, review.downvotes.build], remote: true do |f| %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.submit 'Downvote', class: 'downvote-submit' %>
-      <% end %>
       <li><%= link_to "Edit Review", edit_beach_review_path(@beach, review)%></li>
       <li><%= link_to "Delete Review", "/beaches/#{@beach.id}/reviews/#{review.id}",
         class: "btn btn-small btn-danger form-control",
