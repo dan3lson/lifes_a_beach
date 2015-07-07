@@ -16,8 +16,7 @@ feature 'admin deletes a beach', %{
     amenity = FactoryGirl.create(:amenity)
     FactoryGirl.create(:beach_amenity, beach: beach, amenity: amenity)
 
-    admin = FactoryGirl.create(:user)
-    admin.update_attribute :role, "admin"
+    admin = FactoryGirl.create(:user, role: "admin")
     sign_in(admin)
 
     click_link beach.name
