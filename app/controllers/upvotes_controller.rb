@@ -10,12 +10,12 @@ class UpvotesController < ApplicationController
       )
       respond_to do |format|
         if @upvote.save
-          format.html { redirect_to review_path(@review), notice: "Upvote created successfully." }
+          format.html { redirect_to :back, notice: "Upvote created successfully." }
           format.json { render json: upvote }
         else
           flash[:notice] = "Upvote not created successfully."
-          format.html { redirect_to review_path(@review) }
-          format.json { render json: upvote.errors }
+          format.html { redirect_to :back }
+          format.json { render json: upvote.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -31,7 +31,7 @@ class UpvotesController < ApplicationController
     if @upvote.destroy
       flash[:notice] = "Upvote deleted successfully."
       respond_to do |format|
-         format.html { review_path(@review) }
+         format.html { redirect_to :back }
          format.json { render json: upvote }
       end
     else

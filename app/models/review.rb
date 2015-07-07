@@ -16,4 +16,12 @@ class Review < ActiveRecord::Base
     upvotes.count - downvotes.count
   end
 
+  def upvotes_from(user)
+    upvotes.find_by(user_id: user.id)
+  end
+
+  def downvotes_from(user)
+    downvotes.find_by(user_id: user.id)
+  end
+
 end

@@ -10,11 +10,11 @@ class DownvotesController < ApplicationController
       )
       respond_to do |format|
         if @downvote.save
-          format.html { redirect_to review_path(@review), notice: "Downvote created successfully." }
+          format.html { redirect_to :back, notice: "Downvote created successfully." }
           format.json { render json: downvote }
         else
           flash[:notice] = "Downvote not created successfully."
-          format.html { redirect_to review_path(@review) }
+          format.html { redirect_to :back }
           format.json { render json: downvote.errors }
         end
       end
@@ -31,7 +31,7 @@ class DownvotesController < ApplicationController
     if @downvote.destroy
       flash[:notice] = "Downvote deleted successfully."
       respond_to do |format|
-         format.html { review_path(@review) }
+         format.html { redirect_to :back }
          format.js { render json: downvote }
       end
     else
