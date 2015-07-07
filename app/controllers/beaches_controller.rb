@@ -2,7 +2,14 @@ class BeachesController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
 
   def index
-    search(params[:query])
+    if params[:query] && params[:query].match(/^\s*$/)
+      flash[:notice] = "Please enter one or more words to search."
+      @beaches = Beach.all
+    elsif params[:query]
+      @beaches = Beach.search(params[:query])
+    else
+      @beaches = Beach.all
+    end
   end
 
   def new
@@ -64,41 +71,6 @@ class BeachesController < ApplicationController
   end
 
   private
-
-  def search(query)
-    if query == nil
-      @beaches = Beach.all
-    elsif query.match(/^\s*$/)
-      flash[:notice] = "Please enter one or more words to search."
-      @beaches = Beach.all
-    elsif query.split.size == 1
-      @beaches = Beach.joins(:amenities).where(
-        "beaches.name ILIKE ? OR
-        beaches.description ILIKE ? OR
-        beaches.city ILIKE ? OR
-        beaches.state ILIKE ? OR
-        beaches.zip ILIKE ? OR
-        amenities.name ILIKE ?",
-        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%",
-        "%#{query}%"
-      )
-    elsif query.split.size >= 2
-      container = []
-      query_string = query.split.map do
-        "(beaches.name ILIKE ? OR
-        beaches.description ILIKE ? OR
-        beaches.city ILIKE ? OR
-        beaches.state ILIKE ? OR
-        beaches.zip ILIKE ? OR
-        amenities.name ILIKE ?) AND "
-      end
-
-      container << query_string.inject(:+).rpartition(" AND ").first
-      query.split.each { |word| 6.times { container << "%#{word}%" } }
-
-      @beaches = Beach.joins(:amenities).where(container.flatten)
-    end
-  end
 
   def beach_params
     params.require(:beach).permit(
