@@ -9,8 +9,6 @@ feature 'user creates a new beach', %{
   describe 'user creates beach' do
     scenario "all input fields are valid" do
 
-      # include CarrierWaveDirect::Test::CapybaraHelpers
-
       user = FactoryGirl.create(:user)
       amenities = FactoryGirl.create_list(:amenity, 5)
       sign_in(user)
@@ -26,7 +24,6 @@ feature 'user creates a new beach', %{
       attach_file "Picture URL", (
         "#{Rails.root}/spec/support/images/Plum_island.jpg"
       )
-      # upload_directly(ImageUploader.new, "Upload Image")
       select amenities.first.name, from: "amenities"
       click_on "Create Beach"
 
