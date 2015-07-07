@@ -20,8 +20,7 @@ feature 'admin deletes a review', %{
     FactoryGirl.create(:upvote, review: review, user: user1)
     FactoryGirl.create(:downvote, review: review, user: user3)
 
-    admin = FactoryGirl.create(:user)
-    admin.update_attribute :role, "admin"
+    admin = FactoryGirl.create(:user, role: "admin")
     sign_in(admin)
 
     click_link beach.name
