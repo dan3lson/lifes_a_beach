@@ -84,8 +84,7 @@ class BeachesController < ApplicationController
       )
     elsif query.split.size >= 2
       container = []
-      split_query = query.split
-      mapped_split_query = split_query.map do |word|
+      query_string = query.split.map do
         "(beaches.name ILIKE ? OR
         beaches.description ILIKE ? OR
         beaches.city ILIKE ? OR
@@ -94,8 +93,8 @@ class BeachesController < ApplicationController
         amenities.name ILIKE ?) AND "
       end
 
-      container << mapped_split_query.inject(:+).rpartition(" AND ").first
-      split_query.each { |word| 6.times { container << "%#{word}%" } }
+      container << query_string.inject(:+).rpartition(" AND ").first
+      query.split.each { |word| 6.times { container << "%#{word}%" } }
 
       @beaches = Beach.joins(:amenities).where(container.flatten)
     end
