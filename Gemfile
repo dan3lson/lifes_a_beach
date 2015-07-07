@@ -13,6 +13,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_12factor'
 gem 'responders'
 gem 'kaminari'
+gem 'carrierwave'
+gem 'fog'
+gem 'dotenv-rails'
+gem 'carrierwave_direct'
 
 gem 'puma', group: [:production]
 

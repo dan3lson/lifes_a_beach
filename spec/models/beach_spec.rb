@@ -23,7 +23,6 @@ RSpec.describe Beach, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
     it { should validate_presence_of(:entrance_fee) }
-    it { should validate_presence_of(:picture_url) }
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:user_id) }
   end
@@ -49,9 +48,6 @@ RSpec.describe Beach, type: :model do
     end
     it "returns a entrance_fee string" do
       expect(beach.entrance_fee).to eq(13.33)
-    end
-    it "returns a picture_url string" do
-      expect(beach.picture_url).to eq("http://www.google.com")
     end
     it "returns a description string" do
       expect(beach.description).to eq("Best beach ever.")
