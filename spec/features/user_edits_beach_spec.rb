@@ -83,14 +83,14 @@ feature 'user edits a beach they created', %{
       expect(page).to_not have_content('Delete Beach')
     end
 
-    scenario "malicious user attempts to edit someone else's review" do
+    scenario "non-admin user attempts to edit someone else's beach" do
       beach
       user = FactoryGirl.create(:user)
       sign_in(user)
 
       visit edit_beach_path(beach)
 
-      expect(page.has_selector?('form')).to be(false)
+      expect(page).to_not have_content("Entrance Fee")
     end
   end
 end

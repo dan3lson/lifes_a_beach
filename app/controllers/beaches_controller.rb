@@ -3,6 +3,17 @@ class BeachesController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
   respond_to :html, :json
 
+  def index
+    if params[:query] && params[:query].match(/^\s*$/)
+      flash[:notice] = "Please enter one or more words to search."
+      @beaches = Beach.all.page(params[:page]).per(10)
+    elsif params[:query]
+      @beaches = Beach.search(params[:query]).page(params[:page]).per(10)
+    else
+      @beaches = Beach.all.page(params[:page]).per(10)
+    end
+  end
+
   def new
     @beach = Beach.new
     @amenities = Amenity.all_names
@@ -20,10 +31,6 @@ class BeachesController < ApplicationController
       flash[:notice] = "Beach not created successfully."
     end
     respond_with(@beach)
-  end
-
-  def index
-    @beaches = Beach.all.page(params[:page]).per(10)
   end
 
   def show

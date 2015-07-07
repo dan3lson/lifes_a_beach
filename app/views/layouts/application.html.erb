@@ -16,6 +16,12 @@
 
     <section class="top-bar-section">
       <ul class="right">
+        <li>
+          <%= form_tag beaches_path, method: 'get' do %>
+            <%= text_field_tag :query, params[:query], required: true %>
+            <%= submit_tag "Search", name: nil %>
+          <% end %>
+        </li>
         <%- if current_user -%>
           <% if current_user.role == 'admin' %>
             <li><%= link_to 'View All Users', users_path %></li>

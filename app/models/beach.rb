@@ -13,4 +13,34 @@ class Beach < ActiveRecord::Base
   validates :picture_url, presence: true
   validates :description, presence: true
   validates :user_id, presence: true
+
+  def self.search(query)
+    if query.split.size == 1
+      @beaches = Beach.joins(:amenities).where(
+        "beaches.name ILIKE ? OR
+        beaches.description ILIKE ? OR
+        beaches.city ILIKE ? OR
+        beaches.state ILIKE ? OR
+        beaches.zip ILIKE ? OR
+        amenities.name ILIKE ?",
+        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%",
+        "%#{query}%"
+      )
+    else
+      container = []
+      query_string = query.split.map do
+        "(beaches.name ILIKE ? OR
+        beaches.description ILIKE ? OR
+        beaches.city ILIKE ? OR
+        beaches.state ILIKE ? OR
+        beaches.zip ILIKE ? OR
+        amenities.name ILIKE ?) AND "
+      end
+
+      container << query_string.inject(:+).rpartition(" AND ").first
+      query.split.each { |word| 6.times { container << "%#{word}%" } }
+
+      @beaches = Beach.joins(:amenities).where(container.flatten)
+    end
+  end
 end
