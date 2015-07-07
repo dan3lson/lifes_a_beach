@@ -27,7 +27,7 @@ class BeachesController < ApplicationController
   end
 
   def show
-    @reviews = Review.where(beach_id: @beach.id).page(params[:page]).per(5)
+    @reviews = Review.where(beach_id: @beach.id).page(params[:page]).per(2)
   end
 
   def edit
