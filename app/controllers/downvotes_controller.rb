@@ -8,15 +8,15 @@ class DownvotesController < ApplicationController
         review_id: @review.id,
         user_id: current_user.id
       )
-      if @downvote.save
-        flash[:notice] = "Downvote created successfully."
-        respond_to do |format|
-           format.html { review_path(@review) }
-           format.json { render json: downvote }
+      respond_to do |format|
+        if @downvote.save
+          format.html { redirect_to review_path(@review), notice: "Downvote created successfully." }
+          format.json { render json: downvote }
+        else
+          flash[:notice] = "Downvote not created successfully."
+          format.html { redirect_to review_path(@review) }
+          format.json { render json: downvote.errors }
         end
-      else
-        flash[:notice] = "Downvote not created successfully."
-        render :new
       end
     end
   end

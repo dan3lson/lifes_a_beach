@@ -1,8 +1,8 @@
-jQuery(document).ready(function() {
+$(document).ready(function() {
   $('[data-upvote-button="create"]').on('submit', function(event) {
     event.preventDefault();
     $form = $(event.currentTarget);
-    alert('Review upvoted!');
+    // alert('Review upvoted!');
 
     $.ajax({
       type: "POST",
@@ -32,7 +32,7 @@ jQuery(document).ready(function() {
   $('[data-downvote-button="create"]').on('submit', function(event) {
     event.preventDefault();
     $form = $(event.currentTarget);
-    alert('Review downvoted!');
+    // alert('Review downvoted!');
 
     $.ajax({
       type: "POST",
