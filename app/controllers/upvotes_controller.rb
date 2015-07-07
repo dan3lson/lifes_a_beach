@@ -4,21 +4,19 @@ class UpvotesController < ApplicationController
     if user_signed_in?
       @review = Review.find(params[:review_id])
       @beach = @review.beach
-      # @upvote = Upvote.new(
-      #   review_id: @review.id,
-      #   user_id: current_user.id
-      # )
-
-      @upvote = current_user.upvotes.build(review: @review)
+      @upvote = Upvote.new(
+        review_id: @review.id,
+        user_id: current_user.id
+      )
 
       respond_to do |format|
         if @upvote.save
           format.html { redirect_to :back, notice: "Upvote created successfully." }
-          format.json { render json: upvote }
+          format.json { render json: @upvote }
         else
           flash[:notice] = "Upvote not created successfully."
           format.html { redirect_to :back }
-          format.json { render json: upvote.errors, status: :unprocessable_entity }
+          format.json { render json: @upvote.errors, status: :unprocessable_entity }
         end
       end
     end

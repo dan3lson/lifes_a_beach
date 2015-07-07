@@ -11,11 +11,11 @@ class DownvotesController < ApplicationController
       respond_to do |format|
         if @downvote.save
           format.html { redirect_to :back, notice: "Downvote created successfully." }
-          format.json { render json: downvote }
+          format.json { render json: @downvote }
         else
           flash[:notice] = "Downvote not created successfully."
           format.html { redirect_to :back }
-          format.json { render json: downvote.errors }
+          format.json { render json: @downvote.errors }
         end
       end
     end

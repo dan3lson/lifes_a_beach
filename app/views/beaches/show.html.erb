@@ -34,26 +34,28 @@
     <br/>
 
     <div class='review-<%= @review.id %>' >
-       <h3>Score: <%= @review.score %></h3><br/>
+       Score:
+       <div id='review-<%= @review.id %>-score'><%= @review.score %></div>
     </div>
+
     <% if user_signed_in? %>
-      <%= button_to "Upvote", review_upvotes_path(review),
+      <%= link_to "Upvote", review_upvotes_path(review),
         method: :post,
         # This hash will add a `data-meow-button="create"` to the generated form
         form: { data: { 'upvote-button' => 'create' } } %>
       <% unless review.upvotes_from(current_user).nil? %>
-        <%= button_to "Remove Upvote", review_upvote_path(review, review.upvotes_from(current_user)),
+        <%= link_to "Remove Upvote", review_upvote_path(review, review.upvotes_from(current_user)),
           method: :delete,
           form: { data: { 'upvote-button' => 'delete' } } %>
       <% end %>
 
-      <%= button_to "Downvote", review_downvotes_path(review),
+      <%= link_to "Downvote", review_downvotes_path(review),
         method: :post,
         # This hash will add a `data-meow-button="create"` to the generated form
         form: { data: { 'downvote-button' => 'create' } } %>
 
       <% unless review.downvotes_from(current_user).nil? %>
-        <%= button_to "Remove Downvote", review_downvote_path(review, review.downvotes_from(current_user)),
+        <%= link_to "Remove Downvote", review_downvote_path(review, review.downvotes_from(current_user)),
           method: :delete,
           form: { data: { 'downvote-button' => 'delete' } } %>
       <% end %>
