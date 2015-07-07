@@ -23,7 +23,9 @@ feature 'user creates a new beach', %{
       fill_in "State", with: "state"
       fill_in "Zipcode", with: "zip"
       fill_in "Entrance Fee", with: 3.33
-      attach_file "Picture URL", ("#{Rails.root}/spec/support/images/Plum_island.jpg")
+      attach_file "Picture URL", (
+        "#{Rails.root}/spec/support/images/Plum_island.jpg"
+      )
       # upload_directly(ImageUploader.new, "Upload Image")
       select amenities.first.name, from: "amenities"
       click_on "Create Beach"

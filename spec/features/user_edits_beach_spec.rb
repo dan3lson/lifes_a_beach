@@ -24,7 +24,9 @@ feature 'user edits a beach they created', %{
       fill_in "State", with: "new state"
       fill_in "Zipcode", with: "new zip"
       fill_in "Entrance Fee", with: 33.33
-      attach_file "Picture URL", ("#{Rails.root}/spec/support/images/Plum_island.jpg")
+      attach_file "Picture URL", (
+        "#{Rails.root}/spec/support/images/Plum_island.jpg"
+      )
       click_on "Update Beach"
 
       expect(page).to have_content("Beach updated successfully")
