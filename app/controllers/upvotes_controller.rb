@@ -1,4 +1,8 @@
 class UpvotesController < ApplicationController
+
+  def index
+  end
+
   def create
     if user_signed_in?
       @review = Review.find(params[:review_id])
@@ -7,11 +11,12 @@ class UpvotesController < ApplicationController
         review_id: @review.id,
         user_id: current_user.id
       )
-      @review.score += 1
-
-      if @upvote.save && @review.save
+      if @upvote.save
         flash[:notice] = "Upvote created successfully."
-        redirect_to @beach
+        respond_to do |format|
+           format.html { review_path(@review) }
+           format.js { render :upvote }
+        end
       else
         flash[:notice] = "Upvote not created successfully."
         render :new
@@ -21,16 +26,21 @@ class UpvotesController < ApplicationController
 
   def destroy
     @review = Review.find(params[:review_id])
-    @upvote = Upvote.find_by(user_id: current_user.id, review_id: @review.id)
     @beach = @review.beach
-    @review.score -= 1
-
-    if @upvote.destroy && @review.save
+    @upvote = Upvote.find_by(
+      user_id: current_user.id,
+      review_id: @review.id
+     )
+    if @upvote.destroy
       flash[:notice] = "Upvote deleted successfully."
-      redirect_to @beach
+      respond_to do |format|
+         format.html { review_path(@review) }
+         format.js { render :upvote }
+      end
     else
       flash[:notice] = "Upvote not deleted."
       redirect_to @beach
     end
   end
+
 end
