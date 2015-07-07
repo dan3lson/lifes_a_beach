@@ -9,6 +9,7 @@ $(document).ready(function() {
       url: $form.attr('action'),
       dataType: "json",
       success: function(upvote) {
+        debugger;
         // Create the String version of the form action
         action = '/reviews/' + upvote.review_id + '/upvotes/'+ upvote.id;
 
@@ -28,6 +29,7 @@ $(document).ready(function() {
         // Replace the old create form with the new remove form
         $form.replaceWith($newForm);
       }
+    });
   });
   $('[data-downvote-button="create"]').on('submit', function(event) {
     event.preventDefault();
@@ -58,5 +60,6 @@ $(document).ready(function() {
         // Replace the old create form with the new remove form
         $form.replaceWith($newForm);
       }
+    });
   });
 });
