@@ -9,7 +9,8 @@ feature 'user searches for a beach', %{
   # Acceptance Criteria:
   # [x] User is able to navigate to a search page from any page
   # [x] User is able to enter one or more keywords that search all string fields
-  #     in the beaches and amenities tables as separate case insensitive keywords
+  #     in the beaches and amenities tables as separate case insensitive
+  #     keywords
   # [x] User should be taken to a results page that displays all beaches that
   #     match that search
   # [x] User should not be able to submit an empty search
