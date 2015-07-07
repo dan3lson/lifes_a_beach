@@ -20,7 +20,6 @@ feature 'user downvotes on a review', %{
 
       expect(page).to have_content("Downvote created successfully.")
       expect(page).to_not have_content("Downvote not created successfully.")
-      review.reload
       expect(review.score).to eq(-1)
     end
     scenario 'user clicks remove downvote' do
@@ -37,7 +36,6 @@ feature 'user downvotes on a review', %{
 
       expect(page).to have_content("Downvote deleted successfully.")
       expect(page).to_not have_content("Downvote created successfully.")
-      review.reload
       expect(review.score).to eq(0)
     end
   end
