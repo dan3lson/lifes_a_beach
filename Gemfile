@@ -28,6 +28,7 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'pry-rails'
   gem 'shoulda-matchers', require: false
+  gem 'poltergeist'
 end
 
 gem 'coveralls', group: [:test], require: false

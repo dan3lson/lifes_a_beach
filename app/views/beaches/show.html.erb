@@ -7,13 +7,10 @@
 <p><%= @beach.zip %></p>
 <p><%= @beach.entrance_fee %></p>
 <p><%= @beach.picture_url %></p>
-<p>
-    <% @beach.amenities.each do |amenity| %>
+<p><% @beach.amenities.each do |amenity| %>
       <%= amenity.name %>
       <br/>
-    <% end %>
-</p>
-
+    <% end %></p>
 <br/>
 <% if @reviews.first.nil? %>
   No reviews exist.
@@ -32,36 +29,28 @@
     <br/>
       Description: <%= review.description %>
     <br/>
-
-    <div class='review-<%= @review.id %>' >
-       Score:
-       <div id='review-<%= @review.id %>-score'><%= @review.score %></div>
-    </div>
-
+    <div class='review' >Score: <div id='review-<%= @review.id %>-score'><%= @review.score %></div>
     <% if user_signed_in? %>
-      <%= link_to "Upvote", review_upvotes_path(review),
-        method: :post,
-        # This hash will add a `data-meow-button="create"` to the generated form
-        form: { data: { 'upvote-button' => 'create' } } %>
-      <% unless review.upvotes_from(current_user).nil? %>
-        <%= link_to "Remove Upvote", review_upvote_path(review, review.upvotes_from(current_user)),
-          method: :delete,
-          form: { data: { 'upvote-button' => 'delete' } } %>
-      <% end %>
-
-      <%= link_to "Downvote", review_downvotes_path(review),
-        method: :post,
-        # This hash will add a `data-meow-button="create"` to the generated form
-        form: { data: { 'downvote-button' => 'create' } } %>
-
-      <% unless review.downvotes_from(current_user).nil? %>
-        <%= link_to "Remove Downvote", review_downvote_path(review, review.downvotes_from(current_user)),
-          method: :delete,
-          form: { data: { 'downvote-button' => 'delete' } } %>
-      <% end %>
+        <div class="upvote">
+          <%= link_to "Upvote", review_upvotes_path(review),
+          method: :post,
+          id: "upvote-#{review.id}" %>
+        </div>
+        <br/>
+        <div class="downvote">
+          <%= link_to "Downvote", review_downvotes_path(review),
+          method: :post,
+          id: "downvote-#{review.id}" %>
+        </div>
+      <div id='review-<%= @review.id %>-downvote'>
+        <%= link_to "Downvote", review_downvotes_path(review),
+          method: :post,
+          form: { data: { 'downvote-button' => 'create' } } %>
+      </div>
+      <br/>
     <% end %>
     <br/>
-
+    </div>
     <% if user_signed_in? && review.user == current_user %>
       <li><%= link_to "Edit Review", edit_beach_review_path(@beach, review)%></li>
       <li><%= link_to "Delete Review", "/beaches/#{@beach.id}/reviews/#{review.id}",
@@ -69,25 +58,7 @@
         method: :delete, data: { confirm: "Are you sure?" }
       %></li>
     <% end %>
-
-    <% if user_signed_in? %>
-      <% if review.upvotes.find_by(user_id: current_user.id) %>
-        <%=
-          link_to "Delete Upvote", review_upvote_path(review, Upvote.all.first),
-          method: :delete,
-          class: "btn btn-small btn-danger form-control"
-        %>
-      <% elsif review.downvotes.find_by(user_id: current_user.id) %>
-        <%=
-          link_to "Delete Downvote", review_downvote_path(review, Downvote.all.first),
-          method: :delete,
-          class: "btn btn-small btn-danger form-control"
-        %>
-      <% end %>
-    <% end %>
-
   <% end %>
-
   <hr/>
 <% end %>
 <%= link_to "All Beaches", beaches_path %>
@@ -98,6 +69,5 @@
   <%= link_to "Delete Beach", beach_path(@beach),
     class: "btn btn-small btn-danger form-control",
     # Why does this delete-alert pop up twice?
-    method: :delete, data: { confirm: "Are you sure?" }
-  %>
+    method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
