@@ -1,0 +1,6 @@
+<%= form_tag beaches_path, method: 'get' do %>
+  <label class="control-label sr-only" for="inputSuccess5">
+    Hidden label
+  </label>
+  <%= text_field_tag :query, params[:query], required: true, class: "form-control", placeholder: "Search..." %>
+<% end %>

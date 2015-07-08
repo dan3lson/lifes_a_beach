@@ -12,6 +12,7 @@ class BeachesController < ApplicationController
     else
       @beaches = Beach.all.page(params[:page]).per(10)
     end
+    @random_beach = @beaches.all.sample.name
   end
 
   def new

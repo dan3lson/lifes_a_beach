@@ -14,9 +14,9 @@ class ReviewsController < ApplicationController
     @review.beach = @beach
     @review.user = current_user
     if @review.save
-      flash[:notice] = 'Review created successfully.'
+      flash[:success] = 'Review created successfully.'
     else
-      flash[:error] = @review.errors.full_messages.join(". ")
+      flash[:danger] = @review.errors.full_messages.join(". ")
     end
     respond_with(@beach)
   end
@@ -27,10 +27,10 @@ class ReviewsController < ApplicationController
   def update
     @review.user = current_user
     if @review.update(review_params)
-      flash[:notice] = "Review updated successfully."
+      flash[:success] = "Review updated successfully."
       redirect_to beach_path(@beach)
     else
-      flash.now[:notice] = "Review not updated successfully. " <<
+      flash.now[:danger] = "Review not updated successfully. "
         @review.errors.full_messages.join(". ")
       render :edit
     end
