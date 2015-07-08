@@ -1,3 +1,4 @@
+<%= link_to "test", "/", class: "test" %>
 <h1><%= @beach.name %></h1>
 <p><%= @beach.description %></p>
 <p><%= @beach.street1 %></p>
@@ -31,22 +32,15 @@
     <br/>
     <div class='review' >Score: <div id='review-<%= @review.id %>-score'><%= @review.score %></div>
     <% if user_signed_in? %>
-        <div class="upvote">
           <%= link_to "Upvote", review_upvotes_path(review),
           method: :post,
+          class: "upvote review-#{@review.id}",
           id: "upvote-#{review.id}" %>
-        </div>
         <br/>
-        <div class="downvote">
           <%= link_to "Downvote", review_downvotes_path(review),
           method: :post,
+          class: "downvote review-#{@review.id}",
           id: "downvote-#{review.id}" %>
-        </div>
-      <div id='review-<%= @review.id %>-downvote'>
-        <%= link_to "Downvote", review_downvotes_path(review),
-          method: :post,
-          form: { data: { 'downvote-button' => 'create' } } %>
-      </div>
       <br/>
     <% end %>
     <br/>
