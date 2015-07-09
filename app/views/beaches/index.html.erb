@@ -5,7 +5,7 @@
   <div>
     <% @beaches.each do |beach| %>
       <div
-        class="col-sm-5 columns beach_container"
+        class="col-sm-5 columns beach-container"
         style="
           background: url('<%= beach.picture_url%>');
           background-size: cover; height: 400px;"
@@ -13,7 +13,7 @@
         <h2>
             <%= link_to beach.name, beach_path(beach) %>
             <br/>
-            <span class="beach_index_location_header">
+            <span class="beach-index-location-header">
               <%= beach.city %>,
               <%= beach.state %>
             </span>

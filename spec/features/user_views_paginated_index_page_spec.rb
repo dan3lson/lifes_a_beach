@@ -10,7 +10,7 @@ feature 'visitor views the beach index', %{
 
     visit beaches_path
 
-    expect(page).to have_css("div.beach_container", count: 10)
+    expect(page).to have_css("div.beach-container", count: 10)
   end
 
   scenario 'a visitor views the second index page' do
@@ -20,6 +20,6 @@ feature 'visitor views the beach index', %{
 
     click_link "2"
 
-    expect(page).to have_css("div.beach_container", count: 1)
+    expect(page).to have_css("div.beach-container", count: 1)
   end
 end

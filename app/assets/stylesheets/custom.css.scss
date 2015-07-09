@@ -9,7 +9,7 @@ body {
   padding-top: 20px;
 }
 
-#index_background_header {
+#index-background-header {
   text-align: center;
   padding-top: 300px;
   font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -17,7 +17,7 @@ body {
   font-size: 5em;
   font-weight: bold;
 }
-#search_bar_container .well{
+#search-bar-container .well{
   background: #000;
   background: rgba(0,0,0,.1);
   position: absolute;
@@ -27,38 +27,23 @@ body {
   right: 0;
   border-color: transparent;
 }
-#index_image_one {
-  background: url("http://photos.cntraveler.com/2014/07/31/53da72466dec627b149ead94_la-digue-island-seychelles-Arco-images-GmbH-Alamy.jpg");
-  background-size: cover;
-  height: 400px;
-}
-#index_image_two {
-  background: url("http://www.vosizneias.com/wp-content/uploads/2015/06/miamb.jpg");
-  background-size: cover;
-  height: 400px;
-}
-#index_image_three {
-  background: url("http://dsx.weather.com//util/image/w/bestbeaches_lumahaihawaii.jpg?v=at&w=980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0");
-  background-size: cover;
-  height: 400px;
-}
 .columns {
   padding-top: 150px;
 }
-.index_containers {
+.index-containers {
   margin-top: 100px;
 }
-.index_containers > * {
+.index-containers > * {
   color: #FFF;
 }
-.index_containers > h1 {
+.index-containers > h1 {
   color: inherit;
 }
-.index_containers > p {
+.index-containers > p {
   color: inherit;
 }
 
-#beach_snapshot {
+#beach-snapshot {
   span {
     color: darken($light_gray, 30%);
     padding-bottom: 100px;
@@ -69,7 +54,7 @@ body {
   margin-bottom: 15px;
 }
 
-#beach_snapshot_icon_container {
+#beach-snapshot-icon-container {
   margin-top: 25px;
 }
 
@@ -77,11 +62,11 @@ body {
   text-align: center;
 }
 
-.inline_block {
+.inline-block {
   display: inline-block;
 }
 
-.amenity_name {
+.amenity-name {
   vertical-align: 9px;
 }
 
@@ -91,7 +76,7 @@ body {
     text-align:center;
 }
 
-.section_title {
+.section-title {
   display: inline-block;
   vertical-align: 20px;
 }
@@ -115,7 +100,7 @@ hr {
   border-color: lighten(gray, 30%);
 }
 
-#popular_beaches_container a, .beach_container a {
+#popular-beach-container a, .beach-container a {
   color: $white;
   &:hover {
     text-decoration: none;
@@ -123,11 +108,11 @@ hr {
   }
 }
 
-.beach_container {
+.beach-container {
   margin-bottom: 50px;
 }
 
-.beach_index_location_header {
+.beach-index-location-header {
   color: white;
   opacity: .7;
   font-size: .6em;
@@ -153,7 +138,7 @@ div.header.clearfix {
   color: $beach_blue;
 }
 
-#create_a_beach_btn a {
+#create-a-beach-btn a {
   color: $white;
   border: none;
   &:hover {
@@ -167,7 +152,7 @@ div.header.clearfix {
   clear: both;
 }
 
-#search_form {
+#search-form {
   border: transparent;
   color: $white;
   input {
