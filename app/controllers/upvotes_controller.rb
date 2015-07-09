@@ -19,7 +19,7 @@ class UpvotesController < ApplicationController
           format.html { redirect_to :back }
           format.json do
             render json: @upvote.errors,
-            status: :unprocessable_entity
+                   status: :unprocessable_entity
           end
         end
       end
