@@ -1,4 +1,3 @@
-<%= link_to "test", "/", class: "test" %>
 <h1><%= @beach.name %></h1>
 <p><%= @beach.description %></p>
 <p><%= @beach.street1 %></p>
@@ -34,12 +33,12 @@
     <% if user_signed_in? %>
           <%= link_to "Upvote", review_upvotes_path(review),
           method: :post,
-          class: "upvote review-#{@review.id}",
+          class: "review-#{@review.id} upvote",
           id: "upvote-#{review.id}" %>
         <br/>
           <%= link_to "Downvote", review_downvotes_path(review),
           method: :post,
-          class: "downvote review-#{@review.id}",
+          class: "review-#{@review.id} downvote",
           id: "downvote-#{review.id}" %>
       <br/>
     <% end %>
