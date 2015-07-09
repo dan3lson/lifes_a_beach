@@ -1,6 +1,4 @@
 require 'rails_helper'
-require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
 
 feature 'user upvotes on a review', %{
   As an authenticated user
@@ -9,35 +7,34 @@ feature 'user upvotes on a review', %{
 } do
 
   describe 'User upvotes on a review' do
-    scenario 'user clicks upvote' do
+    scenario 'user clicks upvote', js: true do
       review = FactoryGirl.create(:review)
       beach = review.beach
       user = review.user
 
       sign_in(user)
 
-      visit '/'
-      click_on beach.name
-      click_on 'Upvote'
+      visit beach_path(beach)
 
-      expect(page).to have_content("Upvote created successfully.")
-      expect(page).to_not have_content("Upvote not created successfully.")
+      click_on 'Upvote'
+      sleep 1
+
       expect(review.score).to eq(1)
     end
-    scenario 'user clicks remove upvote' do
+    scenario 'user clicks remove upvote', js: true do
       review = FactoryGirl.create(:review)
       beach = review.beach
       user = review.user
 
       sign_in(user)
 
-      visit '/'
-      click_on beach.name
-      click_on 'Upvote'
-      click_on 'Delete Upvote'
+      visit beach_path(beach)
 
-      expect(page).to have_content("Upvote deleted successfully.")
-      expect(page).to_not have_content("Upvote created successfully.")
+      click_on 'Upvote'
+      sleep 1
+      click_on 'Delete Upvote'
+      sleep 1
+
       expect(review.score).to eq(0)
     end
   end

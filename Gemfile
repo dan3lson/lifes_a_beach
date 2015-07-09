@@ -18,6 +18,11 @@ group :production do
   gem 'rails_12factor'
 end
 
+group :test do
+  gem 'poltergeist'
+  gem 'database_cleaner'
+end
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
@@ -31,7 +36,6 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'pry-rails'
   gem 'shoulda-matchers', require: false
-  gem 'poltergeist'
 end
 
 gem 'coveralls', group: [:test], require: false
