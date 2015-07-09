@@ -8,7 +8,10 @@ $(document).ready(function() {
 
       var reviewId = event.toElement.className.match(/\d+/)[0];
 
-      var score = document.getElementById("review-" + reviewId + "-score").innerHTML;
+      var score = document.getElementById("review-" +
+        reviewId +
+        "-score"
+      ).innerHTML;
       score = parseInt(score);
       score++;
       document.getElementById("review-" + reviewId + "-score").textContent = score;
@@ -32,7 +35,11 @@ $(document).ready(function() {
 
       var reviewId = event.toElement.className.match(/\d+/)[0];
 
-      var score = document.getElementById("review-" + reviewId + "-score").innerHTML;
+      var score = document.getElementById(
+        "review-" +
+        reviewId +
+        "-score"
+      ).innerHTML;
       score = parseInt(score);
       score--;
       document.getElementById("review-" + reviewId + "-score").textContent = score;
@@ -63,7 +70,10 @@ $(document).ready(function() {
 
       var reviewId = event.toElement.className.match(/\d+/)[0];
 
-      var score = document.getElementById("review-" + reviewId + "-score").innerHTML;
+      var score = document.getElementById("review-" +
+        reviewId +
+        "-score"
+      ).innerHTML;
       score = parseInt(score);
       score--;
       document.getElementById("review-" + reviewId + "-score").textContent = score;
@@ -87,7 +97,10 @@ $(document).ready(function() {
 
       var reviewId = event.toElement.className.match(/\d+/)[0];
 
-      var score = document.getElementById("review-" + reviewId + "-score").innerHTML;
+      var score = document.getElementById("review-" +
+        reviewId +
+        "-score"
+      ).innerHTML;
       score = parseInt(score);
       score++;
       document.getElementById("review-" + reviewId + "-score").textContent = score;
