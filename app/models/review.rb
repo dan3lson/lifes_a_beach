@@ -23,5 +23,4 @@ class Review < ActiveRecord::Base
   def downvotes_from(user)
     downvotes.find_by(user_id: user.id)
   end
-
 end

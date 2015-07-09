@@ -1,5 +1,4 @@
 class UpvotesController < ApplicationController
-
   def create
     if user_signed_in?
       @review = Review.find(params[:review_id])
@@ -8,15 +7,16 @@ class UpvotesController < ApplicationController
         review_id: @review.id,
         user_id: current_user.id
       )
-
       respond_to do |format|
         if @upvote.save
-          format.html { redirect_to :back, notice: "Upvote created successfully." }
+          format.html { redirect_to :back,
+            notice: "Upvote created successfully." }
           format.json { render json: @upvote }
         else
           flash[:notice] = "Upvote not created successfully."
           format.html { redirect_to :back }
-          format.json { render json: @upvote.errors, status: :unprocessable_entity }
+          format.json { render json: @upvote.errors,
+            status: :unprocessable_entity }
         end
       end
     end
@@ -32,13 +32,12 @@ class UpvotesController < ApplicationController
     if @upvote.destroy
       flash[:notice] = "Upvote deleted successfully."
       respond_to do |format|
-         format.html { redirect_to :back }
-         format.json { render json: @upvote }
+        format.html { redirect_to :back }
+        format.json { render json: @upvote }
       end
     else
       flash[:notice] = "Upvote not deleted."
       redirect_to @beach
     end
   end
-
 end
