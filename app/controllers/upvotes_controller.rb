@@ -9,15 +9,17 @@ class UpvotesController < ApplicationController
       )
       respond_to do |format|
         if @upvote.save
-          format.html do redirect_to :back,
-                         notice: "Upvote created successfully."
+          format.html do
+            redirect_to :back,
+            notice: "Upvote created successfully."
           end
           format.json { render json: @upvote }
         else
           flash[:notice] = "Upvote not created successfully."
           format.html { redirect_to :back }
-          format.json do render json: @upvote.errors,
-                         status: :unprocessable_entity
+          format.json do
+            render json: @upvote.errors,
+            status: :unprocessable_entity
           end
         end
       end
