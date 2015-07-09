@@ -11,7 +11,7 @@ class DownvotesController < ApplicationController
         if @downvote.save
           format.html do
             redirect_to :back,
-            notice: "Downvote created successfully."
+                        notice: "Downvote created successfully."
           end
           format.json { render json: @downvote }
         else

@@ -11,7 +11,7 @@ class UpvotesController < ApplicationController
         if @upvote.save
           format.html do
             redirect_to :back,
-            notice: "Upvote created successfully."
+                        notice: "Upvote created successfully."
           end
           format.json { render json: @upvote }
         else
