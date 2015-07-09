@@ -10,10 +10,10 @@ class DownvotesController < ApplicationController
       @review.score -= 1
 
       if @downvote.save && @review.save
-        flash[:notice] = "Downvote created successfully."
+        flash[:success] = "Downvote created successfully."
         redirect_to @beach
       else
-        flash[:notice] = "Downvote not created successfully."
+        flash[:danger] = "Downvote not created successfully."
         render :new
       end
     end
@@ -29,10 +29,10 @@ class DownvotesController < ApplicationController
     @review.score += 1
 
     if @downvote.destroy && @review.save
-      flash[:notice] = "Downvote deleted successfully."
+      flash[:success] = "Downvote deleted successfully."
       redirect_to @beach
     else
-      flash[:notice] = "Downvote not deleted."
+      flash[:danger] = "Downvote not deleted."
       redirect_to @beach
     end
   end

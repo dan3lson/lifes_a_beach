@@ -15,7 +15,7 @@ FactoryGirl.define do
     zip "02155"
     sequence(:name) { |n| "Launch Beach#{n}" }
     entrance_fee 13.33
-    picture_url "http://www.google.com"
+    picture_url "picture_url"
     description "Best beach ever."
     user
   end

@@ -14,7 +14,7 @@ feature 'user edits a beach they created', %{
       user = beach.user
       sign_in(user)
 
-      click_link beach.name
+      first(:link, beach.name).click
       click_link 'Update Beach'
 
       fill_in "Name", with: "new Launch Academy"
@@ -45,7 +45,7 @@ feature 'user edits a beach they created', %{
       user = beach.user
       sign_in(user)
 
-      click_link beach.name
+      first(:link, beach.name).click
       click_link 'Update Beach'
 
       fill_in "Name", with: ""
@@ -67,10 +67,9 @@ feature 'user edits a beach they created', %{
       user = beach.user
       sign_in(user)
 
-      click_link beach.name
+      first(:link, beach.name).click
 
       expect(page).to have_content('Update Beach')
-      expect(page).to have_content('Delete Beach')
     end
 
     scenario "user attempts to edit beach created by another user" do
@@ -78,10 +77,9 @@ feature 'user edits a beach they created', %{
       user = FactoryGirl.create(:user)
       sign_in(user)
 
-      click_link beach.name
+      first(:link, beach.name).click
 
       expect(page).to_not have_content('Update Beach')
-      expect(page).to_not have_content('Delete Beach')
     end
 
     scenario "non-admin user attempts to edit someone else's beach" do

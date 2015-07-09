@@ -10,10 +10,18 @@ feature 'admin deletes a user', %{
   # [ ] If I am an admin, I can delete any user's account
   # [ ] If I am not an admin, I can't delete another user's account
 
+  describe "admin delete's user's account" do
+
+  let!(:beach) { FactoryGirl.create(:beach) }
+  let!(:beach2) { FactoryGirl.create(:beach) }
+  let!(:beach3) { FactoryGirl.create(:beach) }
+
   scenario "admin delete's user's account" do
     user = FactoryGirl.create(:user)
     admin = FactoryGirl.create(:user)
+
     admin.update_attribute :role, "admin"
+
     sign_in(admin)
 
     click_on('View All Users')
@@ -38,4 +46,5 @@ feature 'admin deletes a user', %{
     expect(page).to_not have_content('Delete')
   end
 
+  end
 end

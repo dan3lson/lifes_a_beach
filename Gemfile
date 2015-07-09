@@ -10,15 +10,12 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'rails_12factor'
 gem 'responders'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'fog'
 gem 'dotenv-rails'
 gem 'carrierwave_direct'
-
-gem 'puma', group: [:production]
 
 group :development, :test do
   gem 'byebug'
@@ -33,6 +30,11 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'pry-rails'
   gem 'shoulda-matchers', require: false
+end
+
+group :production do
+  gem 'puma'
+  gem 'rails_12factor'
 end
 
 gem 'coveralls', group: [:test], require: false

@@ -5,14 +5,13 @@ class BeachesController < ApplicationController
 
   def index
     if params[:query] && params[:query].match(/^\s*$/)
-      flash[:notice] = "Please enter one or more words to search."
+      flash[:warning] = "Please enter one or more words to search."
       @beaches = Beach.all.page(params[:page]).per(10)
     elsif params[:query]
       @beaches = Beach.search(params[:query]).page(params[:page]).per(10)
     else
       @beaches = Beach.all.page(params[:page]).per(10)
     end
-    @random_beach = @beaches.all.sample.name
   end
 
   def new
@@ -27,9 +26,9 @@ class BeachesController < ApplicationController
     @amenity = Amenity.find_by(name: params[:amenities])
     @beach_amenity = BeachAmenity.new(beach: @beach, amenity: @amenity)
     if @beach.save && @beach_amenity.save
-      flash[:notice] = "Beach created successfully."
+      flash[:success] = "Beach created successfully."
     else
-      flash[:notice] = "Beach not created successfully."
+      flash[:danger] = "Beach not created successfully."
     end
     respond_with(@beach)
   end
@@ -47,9 +46,9 @@ class BeachesController < ApplicationController
     @amenities = Amenity.all_names
     @beach.user = @user
     if @beach.update(beach_params)
-      flash[:notice] = "Beach updated successfully."
+      flash[:success] = "Beach updated successfully."
     else
-      flash[:notice] = "Beach not updated successfully."
+      flash[:danger] = "Beach not updated successfully."
     end
     respond_with(@beach)
   end

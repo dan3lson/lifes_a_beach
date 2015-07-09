@@ -5,19 +5,26 @@ feature 'user signs in', %{
   I want to sign in
   So that I can regain access to my account
 } do
-  scenario 'specify valid credentials' do
-    user = FactoryGirl.create(:user)
-    sign_in(user)
+  describe "user signs in" do
+    let!(:beach) { FactoryGirl.create(:beach) }
+    let!(:beach2) { FactoryGirl.create(:beach) }
+    let!(:beach3) { FactoryGirl.create(:beach) }
 
-    expect(page).to have_content('Signed in successfully')
-    expect(page).to have_content('Sign Out')
-  end
+    scenario 'specify valid credentials' do
+      user = FactoryGirl.create(:user)
 
-  scenario 'specify invalid credentials' do
-    visit new_user_session_path
+      sign_in(user)
 
-    click_button 'Log in'
-    expect(page).to have_content('Invalid email or password')
-    expect(page).to_not have_content('Sign Out')
+      expect(page).to have_content('Signed in successfully.')
+      expect(page).to have_content('Sign Out')
+    end
+
+    scenario 'specify invalid credentials' do
+      visit new_user_session_path
+
+      click_button 'Log in'
+      expect(page).to have_content('Invalid email or password')
+      expect(page).to_not have_content('Sign Out')
+    end
   end
 end

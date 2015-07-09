@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root 'beaches#index'
+  root 'static_pages#home'
 
   authenticate :user do
     resources :beaches, only: [:new, :create, :edit, :update, :destroy] do

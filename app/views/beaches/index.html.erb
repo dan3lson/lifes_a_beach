@@ -1,95 +1,31 @@
-<div id="index_background">
-  <div id="index_background_header">
-    <div>LIFE'S A BEACH</div>
-    <p class="lead">
-      ...so find one and get away.
-    </p>
-  </div>
-  <div id="search_bar_container">
-    <div class="well">
-      <%= render "shared/search_form" %>
-    </div>
-  </div>
-</div>
-<div class="container center index_containers" id="popular_dishes_container">
-  <h1>Popular Beaches</h1>
-  <p class="lead">
-    Discover new beaches that await you.
-  </p>
+<br/>
+<br/>
+
+<div class="center ">
   <div>
-    <div class="col-sm-3 columns" id="index_image_one">
-      <h2><%= link_to @random_beach %></h2>
-    </div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-3 columns" id="index_image_two">
-      <h2><%= link_to @random_beach %></h2>
-    </div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-3 columns" id="index_image_three">
-      <h2><%= link_to @random_beach, class: "beach_header_links" %></h2>
-    </div>
-  </div>
-</div>
-<div class="container center">
-  <br/>
-  <a class="btn btn-default" href="/menu_items" role="button">See All Dishes</a>
-</div>
-<div class="container center index_containers" id="popular_dishes_container">
-  <h1>Tastiest Food Vendors</h1>
-  <div class="col-sm-3 columns" id="index_image_one">
-    <h2>Make Mangu Yours</h2>
-    <p>
-      Create your symbol, Tell your story
-    </p>
-  </div>
-  <div class="col-sm-1"></div>
-  <div class="col-sm-3 columns" id="index_image_two">
-    <h2>Meet Platano</h2>
-    <p>
-      A foodie and cook at heart, Platano loves cooking for others and helping
-      them feel at home through food.
-    </p>
-  </div>
-  <div class="col-sm-1"></div>
-  <div class="col-sm-3 columns" id="index_image_three">
-    <h2>Share Your #Localtarian</h2>
-    <p>
-      Great moments of food-sharing, community-building, and social purpose
-      shared by the Mangu community.
-    </p>
+    <% @beaches.each do |beach| %>
+      <div
+        class="col-sm-5 columns beach_container"
+        style="
+          background: url('<%= beach.picture_url%>');
+          background-size: cover; height: 400px;"
+      >
+        <h2>
+            <%= link_to beach.name, beach_path(beach) %>
+            <br/>
+            <span class="beach_index_location_header">
+              <%= beach.city %>,
+              <%= beach.state %>
+            </span>
+        </h2>
+      </div>
+      <div class="col-sm-1"></div>
+    <% end %>
   </div>
 </div>
 
+<div class="clear"></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<hr>
-<hr>
-<hr>
-<h1>Beaches</h1>
-
-<% @beaches.each do |beach| %>
-  <div class = "beach_container">
-    <%= link_to beach.name, beach_path(beach) %>
-  </div>
-  <hr>
-<% end %>
-
-<%= paginate @beaches %>
-
-<% if user_signed_in? %>
-  <p>
-    <%= link_to "Create Beach", new_beach_path %>
-  </p>
-<% end %>
+<div>
+  <%= paginate @beaches %>
+</div>

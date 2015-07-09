@@ -10,10 +10,10 @@ class UpvotesController < ApplicationController
       @review.score += 1
 
       if @upvote.save && @review.save
-        flash[:notice] = "Upvote created successfully."
+        flash[:success] = "Upvote created successfully."
         redirect_to @beach
       else
-        flash[:notice] = "Upvote not created successfully."
+        flash[:danger] = "Upvote not created successfully."
         render :new
       end
     end
@@ -26,10 +26,10 @@ class UpvotesController < ApplicationController
     @review.score -= 1
 
     if @upvote.destroy && @review.save
-      flash[:notice] = "Upvote deleted successfully."
+      flash[:success] = "Upvote deleted successfully."
       redirect_to @beach
     else
-      flash[:notice] = "Upvote not deleted."
+      flash[:danger] = "Upvote not deleted."
       redirect_to @beach
     end
   end

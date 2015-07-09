@@ -8,7 +8,7 @@ feature 'visitor views the beach index', %{
   scenario 'a visitor views the homepage' do
     FactoryGirl.create_list(:beach, 11)
 
-    visit '/'
+    visit beaches_path
 
     expect(page).to have_css("div.beach_container", count: 10)
   end
@@ -16,7 +16,7 @@ feature 'visitor views the beach index', %{
   scenario 'a visitor views the second index page' do
     FactoryGirl.create_list(:beach, 11)
 
-    visit '/'
+    visit beaches_path
 
     click_link "2"
 

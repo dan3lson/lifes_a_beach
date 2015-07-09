@@ -16,7 +16,7 @@ feature 'user searches for a beach', %{
   # [x] User should not be able to submit an empty search
 
   scenario 'user navigates to a search form' do
-    visit root_path
+    visit beaches_path
 
     expect(page.has_selector?("form")).to be(true)
   end
@@ -27,7 +27,7 @@ feature 'user searches for a beach', %{
     beach1 = beach_amenity.beach
     beach2 = beach_amenity2.beach
 
-    visit root_path
+    visit beaches_path
     fill_in "query", with: beach1.name.split.last
     click_on "Search"
 
@@ -41,7 +41,7 @@ feature 'user searches for a beach', %{
     beach1 = beach_amenity.beach
     beach2 = beach_amenity2.beach
 
-    visit root_path
+    visit beaches_path
     fill_in "query", with: beach2.name
     click_on "Search"
 
@@ -53,7 +53,7 @@ feature 'user searches for a beach', %{
     beach_amenity = FactoryGirl.create(:beach_amenity)
     beach = beach_amenity.beach
 
-    visit root_path
+    visit beaches_path
     fill_in "query", with: "  "
     click_on "Search"
 

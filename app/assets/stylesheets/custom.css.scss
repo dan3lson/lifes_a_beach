@@ -3,17 +3,12 @@
 
 $light_gray: #F2F2F2;
 $white: #FFF;
+$beach_blue: #5bc0de;
 
 body {
   padding-top: 20px;
 }
 
-#index_background{
-  background: url("http://www.gettravelexperience.com/wp-content/uploads/2013/12/Beach.jpg");
-  background-size: cover;
-  height: 700px;
-  position: relative;
-}
 #index_background_header {
   text-align: center;
   padding-top: 300px;
@@ -33,17 +28,17 @@ body {
   border-color: transparent;
 }
 #index_image_one {
-  background: url("http://jackieourman.com/wp-content/uploads/2012/08/IMG_13962.jpg");
+  background: url("http://photos.cntraveler.com/2014/07/31/53da72466dec627b149ead94_la-digue-island-seychelles-Arco-images-GmbH-Alamy.jpg");
   background-size: cover;
   height: 400px;
 }
 #index_image_two {
-  background: url("https://nbclatino.files.wordpress.com/2012/12/pastelon.jpg");
+  background: url("http://www.vosizneias.com/wp-content/uploads/2015/06/miamb.jpg");
   background-size: cover;
   height: 400px;
 }
 #index_image_three {
-  background: url("http://farm4.static.flickr.com/3282/2995642916_7f4cdc96c2.jpg?v=0");
+  background: url("http://dsx.weather.com//util/image/w/bestbeaches_lumahaihawaii.jpg?v=at&w=980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0");
   background-size: cover;
   height: 400px;
 }
@@ -93,7 +88,6 @@ body {
 .col-centered {
     display:inline-block;
     float:none;
-    /* reset the text-align */
     text-align:center;
 }
 
@@ -103,16 +97,95 @@ body {
 }
 
 footer {
-  background: lighten(gray, 30%);
-  a {
-    color: #000;
+  background: $beach_blue;
+  a, span {
+    color: $white;
+    opacity: .8;
   }
   a:hover {
-    color: #FFF;
+    color: $white;
     text-decoration: none;
+  }
+  h3 {
+    color: $white;
   }
 }
 
 hr {
   border-color: lighten(gray, 30%);
+}
+
+#popular_beaches_container a, .beach_container a {
+  color: $white;
+  &:hover {
+    text-decoration: none;
+    opacity: .9;
+  }
+}
+
+.beach_container {
+  margin-bottom: 50px;
+}
+
+.beach_index_location_header {
+  color: white;
+  opacity: .7;
+  font-size: .6em;
+}
+
+h3.text-muted {
+  margin-top: 0;
+}
+
+.text-muted a {
+  color: $beach_blue;
+  &:hover {
+    text-decoration: none;
+    color: lighten($beach_blue, 20%);
+  }
+}
+
+div.header.clearfix {
+  margin-bottom: 20px;
+}
+
+.nav.nav-pills.pull-right li a {
+  color: $beach_blue;
+}
+
+#create_a_beach_btn a {
+  color: $white;
+  border: none;
+  &:hover {
+    background: $beach_blue;
+    border: none;
+    color: lighten($beach_blue, 20%);
+  }
+}
+
+.clear {
+  clear: both;
+}
+
+#search_form {
+  border: transparent;
+  color: $white;
+  input {
+    background: rgba(0, 0, 0, .1);
+  }
+  ::-webkit-input-placeholder {
+     color: $white;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+     color: $white;
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+     color: $white;
+  }
+
+  :-ms-input-placeholder {
+     color: $white;
+  }
 }

@@ -94,14 +94,8 @@
   <h3>
     <%= pluralize(@reviews.count, "review") %>
   </h3>
-  <% if @reviews.first.nil? %>
-    <% if user_signed_in? %>
-      <%= link_to "Add a Review", new_beach_review_path(@beach) %>
-    <% end %>
-  <% else %>
-    <% if user_signed_in? %>
-      <%= link_to "Add a Review", new_beach_review_path(@beach) %>
-    <% end %>
+  <%= link_to 'Write a Review', new_beach_review_path(@beach), class: "btn btn-info btn-sm" %>
+  <% unless @reviews.first.nil? %>
     <% @reviews.each do |review| %>
       <br/>
       Rating: <%= review.rating %>
@@ -111,52 +105,44 @@
       Score: <%= review.score %>
       <br/>
 
-      <% if user_signed_in? && review.user == current_user %>
-        <li><%= link_to "Edit Review", edit_beach_review_path(@beach, review)%></li>
-      <% end %>
-      <% if (user_signed_in? && review.user == current_user) || (user_signed_in? && current_user.role == 'admin') %>
-        <li><%= link_to "Delete Review", "/beaches/#{@beach.id}/reviews/#{review.id}",
-          id: "delete-review#{review.id}",
-          class: "btn btn-small btn-danger form-control",
-          method: :delete, data: { confirm: "Are you sure?" }
-        %></li>
-      <% end %>
-
-      <% if user_signed_in? %>
-        <% if review.upvotes.find_by(user_id: current_user.id) %>
-          <%=
-            link_to "Delete Upvote", review_upvote_path(review, Upvote.all.first),
-            method: :delete,
-            class: "btn btn-small btn-danger form-control"
-          %>
-        <% elsif review.downvotes.find_by(user_id: current_user.id) %>
-          <%=
-            link_to "Delete Downvote", review_downvote_path(review, Downvote.all.first),
-            method: :delete,
-            class: "btn btn-small btn-danger form-control"
-          %>
-        <% else %>
-          <%= link_to "Upvote", review_upvotes_path(review), method: :post %>
-          |
-          <%= link_to "Downvote", review_downvotes_path(review), method: :post %>
-        <% end %>
-      <% end %>
+      <div class="row">
+        <div class="col-xs-6">
+          <% if review.user == current_user || (user_signed_in? && current_user.role == 'admin') %>
+            <%=
+              link_to "Edit Review",
+              edit_beach_review_path(@beach, review),
+              class: "btn btn-small btn-warning form-control"
+            %>
+          <% end %>
+        </div>
+        <div class="col-xs-6">
+          <% if (user_signed_in? && review.user == current_user) || (user_signed_in? && current_user.role == 'admin') %>
+            <%=
+              link_to "Delete Review", "/beaches/#{@beach.id}/reviews/#{review.id}",
+              id: "delete-review#{review.id}",
+              class: "btn btn-small btn-danger form-control",
+              method: :delete, data: { confirm: "Are you sure?" }
+            %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
+
+    <!-- UPVOTE AND DOWNVOTE CODE HERE -->
 
     <%= paginate @reviews %>
 
-    <hr/>
   <% end %>
 </div>
 
 
-<% if @beach.user == current_user %>
+<% if @beach.user == current_user || (user_signed_in? && current_user.role == 'admin') %>
   <div class="row">
     <div class="col-xs-6">
       <%= link_to "Update Beach", edit_beach_path(@beach), class: "btn btn-warning form-control" %>
     </div>
     <div class="col-xs-6">
-      <% if (@beach.user == current_user) || (user_signed_in? && current_user.role == 'admin') %>
+      <% if user_signed_in? && current_user.role == 'admin' %>
         <%= link_to "Delete Beach", beach_path(@beach),
           class: "btn btn-small btn-danger form-control",
           # Why does this delete-alert pop up twice?
