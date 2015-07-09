@@ -17,7 +17,6 @@ AllCops:
   - "**/Vagabondfile"
   Exclude:
   - "vendor/**/*"
-  - "app/assets/javascripts/*"
   - "db/schema.rb"
   RunRailsCops: false
   DisplayCopNames: false
@@ -1064,3 +1063,6 @@ Lint/Void:
 Rails/Delegate:
   Description: Prefer delegate method for delegations.
   Enabled: false
+
+javascript:
+  enabled: false
