@@ -32,7 +32,7 @@ class DownvotesController < ApplicationController
       flash[:notice] = "Downvote deleted successfully."
       respond_to do |format|
          format.html { redirect_to :back }
-         format.js { render json: downvote }
+         format.js { render json: @downvote }
       end
     else
       flash[:notice] = "Downvote not deleted."
