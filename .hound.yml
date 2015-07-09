@@ -17,6 +17,7 @@ AllCops:
   - "**/Vagabondfile"
   Exclude:
   - "vendor/**/*"
+  - "app/assets/javascripts/*"
   - "db/schema.rb"
   RunRailsCops: false
   DisplayCopNames: false
