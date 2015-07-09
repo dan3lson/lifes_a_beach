@@ -1065,4 +1065,4 @@ Rails/Delegate:
   Enabled: false
 
 javascript:
-  enabled: false
+  enabled: true
