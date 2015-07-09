@@ -14,14 +14,13 @@ $(document).ready(function() {
       document.getElementById("review-" + reviewId + "-score").textContent = score;
 
       // also hide upvote button
-      var url = '/reviews/' + reviewId + '/upvotes';
+      var url = "/reviews/" + reviewId + "/upvotes";
 
       $.ajax({
         type: "POST",
         url: url,
         dataType: "json",
-        complete: function(upvote) {
-          var upvoteId = JSON.parse(upvote.responseText)["id"];
+        complete: function() {
           var reviewClass = ".review-" + reviewId + ".upvote";
           $(reviewClass).attr("data-method", "delete");
           $(reviewClass).text("Delete Upvote");
@@ -42,13 +41,13 @@ $(document).ready(function() {
       var upvoteId = $(reviewClass).attr("href").match(/\d+/)[0];
 
       // also hide upvote button
-      var url = '/reviews/' + reviewId + '/upvotes/' + upvoteId;
+      var url = "/reviews/" + reviewId + "/upvotes/" + upvoteId;
 
       $.ajax({
         type: "DELETE",
         url: url,
         dataType: "json",
-        complete: function(upvote) {
+        complete: function() {
           $(reviewClass).attr("data-method", "post");
           $(reviewClass).text("Upvote");
         }
@@ -70,14 +69,13 @@ $(document).ready(function() {
       document.getElementById("review-" + reviewId + "-score").textContent = score;
 
       // also hide downvote button
-      var url = '/reviews/' + reviewId + '/downvotes';
+      var url = "/reviews/" + reviewId + "/downvotes";
 
       $.ajax({
         type: "POST",
         url: url,
         dataType: "json",
-        complete: function(downvote) {
-          var downvoteId = JSON.parse(downvote.responseText)["id"];
+        complete: function() {
           var reviewClass = ".review-" + reviewId + ".downvote";
           $(reviewClass).attr("data-method", "delete");
           $(reviewClass).text("Delete Downvote");
@@ -98,13 +96,13 @@ $(document).ready(function() {
       var downvoteId = $(reviewClass).attr("href").match(/\d+/)[0];
 
       // also hide downvote button
-      var url = '/reviews/' + reviewId + '/downvotes/' + downvoteId;
+      var url = "/reviews/" + reviewId + "/downvotes/" + downvoteId;
 
       $.ajax({
         type: "DELETE",
         url: url,
         dataType: "json",
-        complete: function(downvote) {
+        complete: function() {
           $(reviewClass).attr("data-method", "post");
           $(reviewClass).text("Downvote");
         }
