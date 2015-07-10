@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>LifesABeach</title>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-  <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">LifesABeach</a></h1>
-      </li>
-    </ul>
-
-    <section class="top-bar-section">
-      <ul class="right">
-        <li>
-          <%= form_tag beaches_path, method: 'get' do %>
-            <%= text_field_tag :query, params[:query], required: true %>
-            <%= submit_tag "Search", name: nil %>
-          <% end %>
-        </li>
-        <%- if current_user -%>
-          <% if current_user.role == 'admin' %>
-            <li><%= link_to 'View All Users', users_path %></li>
-          <% end %>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-          <li><%= link_to "Change Account Information", edit_user_registration_path %></li>
-        <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
-        <%- end -%>
-      </ul>
-    </section>
-  </nav>
-
-  <%- flash.each do |key, value| -%>
-    <div class="flash flash-<%= key %>">
-      <%= value %>
+  <head>
+    <title>Life's a Beach</title>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:div, message, class: "alert alert-#{message_type} center") %>
+        <% end %>
+      </div>
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <% unless params[:controller] == "static_pages" %>
+              <li role="presentation">
+                <%= render "shared/search_form" %>
+              </li>
+            <% end %>
+            <li role="presentation">
+              <% if current_user %>
+                <% if current_user.role == 'admin' %>
+                  <li><%= link_to 'View All Users', users_path %></li>
+                <% end %>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+                <li><%= link_to "My Profile", edit_user_registration_path %></li>
+                <li id="create-a-beach-btn"><%= link_to 'Create a Beach', new_beach_path, class: "btn btn-info" %></li>
+              <% else %>
+                <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+                <li><%= link_to 'Log In', new_user_session_path %></li>
+                <li id="create-a-beach-btn"><%= link_to 'Create a Beach', new_user_registration_path, class: "btn btn-info" %></li>
+              <% end %>
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">
+          <%= link_to "Life\'s a Beach", root_path %>
+        </h3>
+      </div>
+      <%= yield %>
+      <div class="clear"></div>
+      <%#= debug(params) if Rails.env.development? %>
+      <%= render "layouts/footer" %>
     </div>
-  <%- end -%>
-
-  <%= yield %>
-
-  <%= javascript_include_tag 'application' %>
-  <%= yield :extra_footer %>
-</body>
+    <%= javascript_include_tag 'application' %>
+    <%= yield :extra_footer %>
+  </body>
 </html>

@@ -9,14 +9,20 @@ feature 'user deletes account information', %{
   # Acceptance Criteria:
   # [x] I am able to delete my account
 
-  scenario 'provide valid registration information' do
-    user = FactoryGirl.create(:user)
-    sign_in(user)
+  describe "user deletes acct" do
+    let!(:beach) { FactoryGirl.create(:beach) }
+    let!(:beach2) { FactoryGirl.create(:beach) }
+    let!(:beach3) { FactoryGirl.create(:beach) }
+    scenario 'provide valid registration information' do
+      user = FactoryGirl.create(:user)
 
-    click_link 'Change Account Information'
+      sign_in(user)
 
-    click_button 'Cancel my account'
+      click_on 'My Profile'
 
-    expect(page).to have_content('Bye')
+      click_on 'Delete My Account'
+
+      expect(page).to have_content('Bye')
+    end
   end
 end

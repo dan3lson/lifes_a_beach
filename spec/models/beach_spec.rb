@@ -15,7 +15,6 @@ RSpec.describe Beach, type: :model do
         state: "state",
         zip: "zip",
         entrance_fee: 3.33,
-        picture_url: "picture_url",
         description: "description",
         user_id: 1
       )

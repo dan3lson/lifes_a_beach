@@ -1,0 +1,59 @@
+<% unless @random_beaches.nil? && @random_beach_picture_url.nil? %>
+  <div style=
+    "background: url('<%= @random_beach_picture_url %>');
+    background-size: cover;
+    height: 700px;
+    position: relative;"
+  >
+    <div class="index-background-header">
+      <div>LIFE'S A BEACH</div>
+      <p class="lead">
+        ...so find one and get away.
+      </p>
+    </div>
+    <div class="search-bar-container">
+      <div class="well">
+        <%= render "shared/search_form" %>
+      </div>
+    </div>
+  </div>
+  <div class="container center index-containers popular-beach-container">
+    <h1>Popular Beaches</h1>
+    <p class="lead">
+      Discover new beaches that await you.
+    </p>
+    <div>
+      <div class="col-sm-3 columns" style=
+        "background: url('<%= @random_beaches[0].picture_url %>');
+        background-size: cover;
+        height: 400px;"
+      >
+        <h2><%= link_to @random_beaches[0].name, beach_path(@random_beaches[0]) %></h2>
+      </div>
+      <div class="col-sm-1"></div>
+      <div class="col-sm-3 columns" style=
+      "background: url('<%= @random_beaches[1].picture_url %>');
+        background-size: cover;
+        height: 400px;"
+      >
+        <h2><%= link_to @random_beaches[1].name, beach_path(@random_beaches[1]) %></h2>
+      </div>
+      <div class="col-sm-1"></div>
+      <div class="col-sm-3 columns" style=
+      "background: url('<%= @random_beaches[2].picture_url %>');
+        background-size: cover;
+        height: 400px;"
+      >
+        <h2><%= link_to @random_beaches[2].name, beach_path(@random_beaches[2]) %></h2>
+      </div>
+    </div>
+  </div>
+  <div class="container center">
+    <br/>
+    <%= link_to "See All Beaches", beaches_path, class: "btn btn-default" %>
+  </div>
+
+  <br/>
+  <br/>
+  <br/>
+<% end %>

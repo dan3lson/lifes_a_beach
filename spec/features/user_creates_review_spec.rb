@@ -17,9 +17,9 @@ feature 'user creates a review', %{
     user = beach.user
     sign_in(user)
 
-    click_link beach.name
+    first(:link, beach.name).click
 
-    expect(page).to have_content("Add a Review")
+    expect(page).to have_content("Write a Review")
   end
 
   scenario 'unauthenticated user attempts to add a review' do
@@ -27,9 +27,11 @@ feature 'user creates a review', %{
 
     visit root_path
 
-    click_link beach.name
+    first(:link, beach.name).click
 
-    expect(page).to_not have_content("Add a Review")
+    click_link "Write a Review"
+
+    expect(page).to have_content("Log in")
   end
 
   scenario 'user submits new review for a beach' do
@@ -37,9 +39,9 @@ feature 'user creates a review', %{
     user = beach.user
     sign_in(user)
 
-    click_link beach.name
+    first(:link, beach.name).click
 
-    click_link 'Add a Review'
+    click_link 'Write a Review'
 
     select 'Great - 5', from: 'Rating'
     fill_in "Description", with: "Best beach ever"
@@ -53,9 +55,9 @@ feature 'user creates a review', %{
     user = beach.user
     sign_in(user)
 
-    click_link beach.name
+    first(:link, beach.name).click
 
-    click_link 'Add a Review'
+    click_link 'Write a Review'
 
     click_button "Submit"
     expect(page).to have_content("can\'t be blank")

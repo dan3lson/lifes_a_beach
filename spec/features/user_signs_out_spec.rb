@@ -10,18 +10,24 @@ feature 'user signs out', %{
   # * When I opt to sign out, I get a confirmation that my identity has been
   #   forgotten on the machine I'm using
 
-  scenario 'authenticated user signs out' do
-    user = FactoryGirl.create(:user)
-    sign_in(user)
+  describe "user signs out" do
+    let!(:beach) { FactoryGirl.create(:beach) }
+    let!(:beach2) { FactoryGirl.create(:beach) }
+    let!(:beach3) { FactoryGirl.create(:beach) }
 
-    expect(page).to have_content('Signed in successfully')
+    scenario 'authenticated user signs out' do
+      user = FactoryGirl.create(:user)
+      sign_in(user)
 
-    click_link 'Sign Out'
-    expect(page).to have_content('Signed out successfully')
-  end
+      expect(page).to have_content('Signed in successfully')
 
-  scenario 'unauthenticated user attempts to sign out' do
-    visit '/'
-    expect(page).to_not have_content('Sign Out')
+      click_link 'Sign Out'
+      expect(page).to have_content('Signed out successfully')
+    end
+
+    scenario 'unauthenticated user attempts to sign out' do
+      visit '/'
+      expect(page).to_not have_content('Sign Out')
+    end
   end
 end

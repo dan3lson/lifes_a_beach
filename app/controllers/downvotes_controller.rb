@@ -40,7 +40,7 @@ class DownvotesController < ApplicationController
         format.js { render json: @downvote }
       end
     else
-      flash[:notice] = "Downvote not deleted."
+      flash[:danger] = "Downvote not deleted."
       redirect_to @beach
     end
   end

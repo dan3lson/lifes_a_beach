@@ -1,0 +1,192 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$light-gray: #f2f2f2;
+$white: #fff;
+$beach-blue: #5bc0de;
+
+body {
+  padding-top: 20px;
+}
+
+.index-background-header {
+  color: $white;
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 5em;
+  font-weight: bold;
+  padding-top: 300px;
+  text-align: center;
+}
+
+.search-bar-container .well {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: transparent;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0;
+  position: absolute;
+  right: 0;
+}
+
+.columns {
+  padding-top: 150px;
+}
+
+.index-containers {
+  margin-top: 100px;
+
+  * {
+    color: $white;
+  }
+
+  h1 {
+    color: inherit;
+  }
+
+  p {
+    color: inherit;
+  }
+}
+
+.beach-snapshot {
+  margin-bottom: 15px;
+
+  h1 {
+    margin-bottom: 3px;
+  }
+
+  span {
+    color: darken($light-gray, 30%);
+    padding-bottom: 100px;
+  }
+}
+
+.beach-snapshot-icon-container {
+  margin-top: 25px;
+}
+
+.center {
+  text-align: center;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.amenity-name {
+  vertical-align: 9px;
+}
+
+.col-centered {
+  display: inline-block;
+  float: none;
+  text-align: center;
+}
+
+.section-title {
+  display: inline-block;
+  vertical-align: 20px;
+}
+
+footer {
+  background: $beach-blue;
+
+  a,
+  span {
+    color: $white;
+    opacity: 0.8;
+  }
+
+  a:hover {
+    color: $white;
+    text-decoration: none;
+  }
+
+  h3 {
+    color: $white;
+  }
+}
+
+hr {
+  border-color: lighten($light_gray, 30%);
+}
+
+.popular-beach-container a,
+.beach-container a {
+  color: $white;
+
+  &:hover {
+    opacity: 0.9;
+    text-decoration: none;
+  }
+}
+
+.beach-container {
+  margin-bottom: 50px;
+}
+
+.beach-index-location-header {
+  color: $white;
+  font-size: 0.6em;
+  opacity: 0.7;
+}
+
+.text-muted {
+  margin-top: 0;
+
+  a {
+    color: $beach-blue;
+  }
+
+  a:hover {
+    color: lighten($beach-blue, 20%);
+    text-decoration: none;
+  }
+}
+
+.header.clearfix {
+  margin-bottom: 20px;
+}
+
+.nav-pills.pull-right li a {
+  color: $beach-blue;
+}
+
+#create-a-beach-btn a {
+  border: none;
+  color: $white;
+
+  &:hover {
+    background: $beach-blue;
+    border: none;
+    color: lighten($beach-blue, 20%);
+  }
+}
+
+.clear {
+  clear: both;
+}
+
+#search-form {
+  border: transparent;
+  color: $white;
+
+  input {
+    background: rgba(0, 0, 0, 0.1);
+    color: $white;
+  }
+  ::-webkit-input-placeholder {
+     color: $white;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+     color: $white;
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+     color: $white;
+  }
+
+  :-ms-input-placeholder {
+     color: $white;
+  }
+}

@@ -17,6 +17,24 @@ User.create!(
 )
 
 Rails.logger.info "==============================================="
+Rails.logger.info "Creating Amenities"
+Rails.logger.info "==============================================="
+
+@amenities = [
+  Amenity.create!(name: "Dogs Allowed"),
+  Amenity.create!(name: "Volleyball Courts"),
+  Amenity.create!(name: "Showers"),
+  Amenity.create!(name: "Grills"),
+  Amenity.create!(name: "Permit Required"),
+  Amenity.create!(name: "Fishing"),
+  Amenity.create!(name: "Boardwalk"),
+  Amenity.create!(name: "Parking"),
+  Amenity.create!(name: "Food Vendors"),
+  Amenity.create!(name: "Bathrooms")
+]
+@amenities.each { |amenity| Rails.logger.info "Amentity: #{amenity.name}" }
+
+Rails.logger.info "==============================================="
 Rails.logger.info "Creating Beaches"
 Rails.logger.info "==============================================="
 
@@ -31,28 +49,15 @@ Rails.logger.info "==============================================="
     user: User.all.sample,
     entrance_fee: 6.50,
     description: Faker::Lorem.sentence,
-    picture_url: Faker::Lorem.sentence
+    picture_url: File.open(File.join(
+      Rails.root,
+      "spec/support/images/default_beach.jpg"
+      )
+    )
   )
+  beach.amenities << @amenities.sample
   Rails.logger.info "Beach name: #{beach.name}"
 end
-
-Rails.logger.info "==============================================="
-Rails.logger.info "Creating Amenities"
-Rails.logger.info "==============================================="
-
-amenities = [
-  Amenity.create!(name: "Dogs Allowed"),
-  Amenity.create!(name: "Volleyball Courts"),
-  Amenity.create!(name: "Showers"),
-  Amenity.create!(name: "Grills"),
-  Amenity.create!(name: "Permit Required"),
-  Amenity.create!(name: "Fishing"),
-  Amenity.create!(name: "Boardwalk"),
-  Amenity.create!(name: "Parking"),
-  Amenity.create!(name: "Food Vvendors"),
-  Amenity.create!(name: "Bathrooms")
-]
-amenities.each { |amenity| Rails.logger.info "Amentity: #{amenity.name}" }
 
 Rails.logger.info "==============================================="
 Rails.logger.info "Creating Reviews"

@@ -7,6 +7,10 @@ feature 'user creates a new beach', %{
 } do
 
   describe 'user creates beach' do
+    let!(:beach) { FactoryGirl.create(:beach) }
+    let!(:beach2) { FactoryGirl.create(:beach) }
+    let!(:beach3) { FactoryGirl.create(:beach) }
+
     scenario "all input fields are valid" do
 
       user = FactoryGirl.create(:user)
@@ -37,7 +41,7 @@ feature 'user creates a new beach', %{
       expect(page).to have_content(3.33)
       expect(page).to have_selector("img")
       expect(page).to have_content("description")
-      expect(Beach.count).to eq(1)
+      expect(Beach.count).to eq(4)
     end
 
     scenario "all input fields are invalid" do
@@ -57,7 +61,7 @@ feature 'user creates a new beach', %{
       expect(page).to_not have_content("Beach created successfully")
       expect(page).to have_content("Beach not created successfully")
       expect(page).to have_content("error")
-      expect(Beach.count).to eq(0)
+      expect(Beach.count).to eq(3)
     end
 
     scenario "unauthenticated user attempts to create a beach" do
