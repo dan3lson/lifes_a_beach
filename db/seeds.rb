@@ -51,7 +51,8 @@ Rails.logger.info "==============================================="
     description: Faker::Lorem.sentence,
     picture_url: File.open(File.join(
       Rails.root,
-      "spec/support/images/default_beach.jpg")
+      "spec/support/images/default_beach.jpg"
+      )
     )
   )
   beach.amenities << @amenities.sample

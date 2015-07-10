@@ -103,8 +103,8 @@ hr {
 #popular-beach-container a, .beach-container a {
   color: $white;
   &:hover {
-    text-decoration: none;
     opacity: .9;
+    text-decoration: none;
   }
 }
 
@@ -120,12 +120,13 @@ hr {
 
 .text-muted {
   margin-top: 0;
-  a {
-    color: $beach-blue;
-    &:hover {
-      color: lighten($beach-blue, 20%);
-      text-decoration: none;
-    }
+}
+
+.text-muted a {
+  color: $beach-blue;
+  &:hover {
+    color: lighten($beach-blue, 20%);
+    text-decoration: none;
   }
 }
 
@@ -138,8 +139,8 @@ hr {
 }
 
 #create-a-beach-btn a {
-  color: $white;
   border: none;
+  color: $white;
   &:hover {
     background: $beach-blue;
     border: none;
@@ -154,22 +155,11 @@ hr {
 #search-form {
   border: transparent;
   color: $white;
-  input {
-    background: rgba(0, 0, 0, .1);
-  }
+}
+
+#search-form input {
+  background: rgba(0, 0, 0, .1);
   ::-webkit-input-placeholder {
-     color: $white;
-  }
-
-  :-moz-placeholder {
-     color: $white;
-  }
-
-  ::-moz-placeholder {
-     color: $white;
-  }
-
-  :-ms-input-placeholder {
      color: $white;
   }
 }

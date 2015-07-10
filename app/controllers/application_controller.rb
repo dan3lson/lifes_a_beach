@@ -13,31 +13,31 @@ class ApplicationController < ActionController::Base
   def beach_photo_urls
     [
       "http://photos.cntraveler.com/2014/07/31/53da72466dec627b149ead94" <<
-      "_la-digue-island-seychelles-Arco-images-GmbH-Alamy.jpg",
+        "_la-digue-island-seychelles-Arco-images-GmbH-Alamy.jpg",
       "http://photos.cntraveler.com/2014/11/13/5464d448cbbd2620680d904d_" <<
-      "bora-bora-essay-2048-1152.jpg",
+        "bora-bora-essay-2048-1152.jpg",
       "http://photos.cntraveler.com/2014/08/06/53e2e101c2d3f39d3610721a_" <<
-      "na-pali-coast-kauai-hawaii-alamy.jpg",
+        "na-pali-coast-kauai-hawaii-alamy.jpg",
       "http://dsx.weather.com//util/image/w/bestbeaches_cayodeaguavenezu" <<
-      "ela.jpg?v=at&w=980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
+        "ela.jpg?v=at&w=980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
       "http://dsx.weather.com//util/image/w/31islands_boracay.jpg?v=at&w=" <<
-      "980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
+        "980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
       "http://dsx.weather.com//util/image/w/bestbeaches_etretatfrance.jpg?" <<
-      "v=at&w=980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
+        "v=at&w=980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
       "http://dsx.weather.com//util/image/w/bestbeaches_lumahaihawaii" <<
-      ".jpg?v=at&w=980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
+        ".jpg?v=at&w=980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
       "http://www.ggwallpaper.com/file/4659/2560x1440/crop/-shi-shi-beach" <<
-      "-in-washington-state-1920x1080.jpg",
+        "-in-washington-state-1920x1080.jpg",
       "http://www.inparkmagazine.com/wp-content/uploads/2014/01/1524109" <<
-      "_10152500433793378_910646857_o.jpg",
+        "_10152500433793378_910646857_o.jpg",
       "https://boonstoon.files.wordpress.com/2012/05/beach1.jpg",
-      "http://www.vosizneias.com/wp-content/uploads/2015/06/miamb.jpg",
+        "http://www.vosizneias.com/wp-content/uploads/2015/06/miamb.jpg",
       "http://dsx.weather.com//util/image/w/cablebeach.jpg?v=at&w=980&h=" <<
-      "551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
+        "551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
       "http://dsx.weather.com//util/image/w/bestbeaches_glyfadacorfu.jpg?" <<
-      "v=at&w=980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
+        "v=at&w=980&h=551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
       "https://upload.wikimedia.org/wikipedia/commons/e/e4/Spring" <<
-      "_Lake_Beach.jpg"
+        "_Lake_Beach.jpg"
     ]
   end
 end
