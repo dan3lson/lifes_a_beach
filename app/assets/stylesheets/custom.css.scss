@@ -3,7 +3,7 @@
 
 $light_gray: #F2F2F2;
 $white: #FFF;
-$beach_blue: #5bc0de;
+$beach-blue: #5bc0de;
 
 body {
   padding-top: 20px;
@@ -82,7 +82,7 @@ body {
 }
 
 footer {
-  background: $beach_blue;
+  background: $beach-blue;
   a, span {
     color: $white;
     opacity: .8;
@@ -118,33 +118,32 @@ hr {
   font-size: .6em;
 }
 
-h3.text-muted {
+.text-muted {
   margin-top: 0;
-}
-
-.text-muted a {
-  color: $beach_blue;
-  &:hover {
-    text-decoration: none;
-    color: lighten($beach_blue, 20%);
+  a {
+    color: $beach-blue;
+    &:hover {
+      color: lighten($beach-blue, 20%);
+      text-decoration: none;
+    }
   }
 }
 
-div.header.clearfix {
+.header.clearfix {
   margin-bottom: 20px;
 }
 
-.nav.nav-pills.pull-right li a {
-  color: $beach_blue;
+.nav-pills.pull-right li a {
+  color: $beach-blue;
 }
 
 #create-a-beach-btn a {
   color: $white;
   border: none;
   &:hover {
-    background: $beach_blue;
+    background: $beach-blue;
     border: none;
-    color: lighten($beach_blue, 20%);
+    color: lighten($beach-blue, 20%);
   }
 }
 
@@ -162,11 +161,11 @@ div.header.clearfix {
      color: $white;
   }
 
-  :-moz-placeholder { /* Firefox 18- */
+  :-moz-placeholder {
      color: $white;
   }
 
-  ::-moz-placeholder {  /* Firefox 19+ */
+  ::-moz-placeholder {
      color: $white;
   }
 

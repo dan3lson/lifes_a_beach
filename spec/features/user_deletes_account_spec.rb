@@ -13,7 +13,6 @@ feature 'user deletes account information', %{
     let!(:beach) { FactoryGirl.create(:beach) }
     let!(:beach2) { FactoryGirl.create(:beach) }
     let!(:beach3) { FactoryGirl.create(:beach) }
-    
     scenario 'provide valid registration information' do
       user = FactoryGirl.create(:user)
 

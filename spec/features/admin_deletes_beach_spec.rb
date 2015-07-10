@@ -19,7 +19,6 @@ feature 'admin deletes a beach', %{
     scenario 'admin deletes a beach' do
       beach_amenity = FactoryGirl.create(:beach_amenity)
       beach = beach_amenity.beach
-      amenity = beach_amenity.amenity
 
       admin = FactoryGirl.create(:user, role: "admin")
 

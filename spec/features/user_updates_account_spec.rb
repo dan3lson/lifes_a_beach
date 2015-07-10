@@ -30,7 +30,9 @@ feature 'user updates account information', %{
 
       click_button 'Update'
 
-      expect(page).to have_content('Your account has been updated successfully.')
+      expect(page).to have_content(
+        'Your account has been updated successfully.'
+      )
       expect(page).to have_content('Sign Out')
     end
 

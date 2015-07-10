@@ -11,40 +11,39 @@ feature 'admin deletes a user', %{
   # [ ] If I am not an admin, I can't delete another user's account
 
   describe "admin delete's user's account" do
+    let!(:beach) { FactoryGirl.create(:beach) }
+    let!(:beach2) { FactoryGirl.create(:beach) }
+    let!(:beach3) { FactoryGirl.create(:beach) }
 
-  let!(:beach) { FactoryGirl.create(:beach) }
-  let!(:beach2) { FactoryGirl.create(:beach) }
-  let!(:beach3) { FactoryGirl.create(:beach) }
+    scenario "admin delete's user's account" do
+      user = FactoryGirl.create(:user)
+      admin = FactoryGirl.create(:user)
 
-  scenario "admin delete's user's account" do
-    user = FactoryGirl.create(:user)
-    admin = FactoryGirl.create(:user)
+      admin.update_attribute :role, "admin"
 
-    admin.update_attribute :role, "admin"
+      sign_in(admin)
 
-    sign_in(admin)
+      click_on('View All Users')
 
-    click_on('View All Users')
+      expect(page).to have_content(user.email)
 
-    expect(page).to have_content(user.email)
+      click_link("delete-#{user.id}")
 
-    click_link("delete-#{user.id}")
+      expect(page).to have_content('User successfully deleted')
+      expect(page).to_not have_content(user.email)
+    end
 
-    expect(page).to have_content('User successfully deleted')
-    expect(page).to_not have_content(user.email)
-  end
+    scenario "user cannot delete another user's account" do
+      user = FactoryGirl.create(:user)
 
-  scenario "user cannot delete another user's account" do
-    user = FactoryGirl.create(:user)
-    sign_in(user)
+      sign_in(user)
 
-    expect(page).to_not have_content('View All Users')
+      expect(page).to_not have_content('View All Users')
 
-    visit users_path
+      visit users_path
 
-    expect(page).to_not have_content(user.email)
-    expect(page).to_not have_content('Delete')
-  end
-
+      expect(page).to_not have_content(user.email)
+      expect(page).to_not have_content('Delete')
+    end
   end
 end

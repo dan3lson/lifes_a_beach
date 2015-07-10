@@ -49,7 +49,10 @@ Rails.logger.info "==============================================="
     user: User.all.sample,
     entrance_fee: 6.50,
     description: Faker::Lorem.sentence,
-    picture_url: File.open(File.join(Rails.root, "spec/support/images/default_beach.jpg"))
+    picture_url: File.open(File.join(
+      Rails.root,
+      "spec/support/images/default_beach.jpg")
+    )
   )
   beach.amenities << @amenities.sample
   Rails.logger.info "Beach name: #{beach.name}"
