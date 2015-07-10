@@ -2,14 +2,14 @@
 @import "bootstrap";
 
 $light-gray: #f2f2f2;
-$white: $white;
+$white: #fff;
 $beach-blue: #5bc0de;
 
 body {
   padding-top: 20px;
 }
 
-#index-background-header {
+.index-background-header {
   color: $white;
   font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 5em;
@@ -18,7 +18,7 @@ body {
   text-align: center;
 }
 
-#search-bar-container .well {
+.search-bar-container .well {
   background: rgba(0, 0, 0, 0.1);
   border-color: transparent;
   bottom: 0;
@@ -34,31 +34,34 @@ body {
 
 .index-containers {
   margin-top: 100px;
-  p {
-    color: inherit;
-  }
-  h1 {
-    color: inherit;
-  }
+
   * {
     color: $white;
   }
+
+  h1 {
+    color: inherit;
+  }
+
+  p {
+    color: inherit;
+  }
 }
 
+.beach-snapshot {
+  margin-bottom: 15px;
 
+  h1 {
+    margin-bottom: 3px;
+  }
 
-#beach-snapshot {
   span {
     color: darken($light-gray, 30%);
     padding-bottom: 100px;
   }
-  h1 {
-    margin-bottom: 3px;
-  }
-  margin-bottom: 15px;
 }
 
-#beach-snapshot-icon-container {
+.beach-snapshot-icon-container {
   margin-top: 25px;
 }
 
@@ -87,14 +90,17 @@ body {
 
 footer {
   background: $beach-blue;
+
   a, span {
     color: $white;
     opacity: 0.8;
   }
+
   a:hover {
     color: $white;
     text-decoration: none;
   }
+
   h3 {
     color: $white;
   }
@@ -104,10 +110,10 @@ hr {
   border-color: lighten(gray, 30%);
 }
 
-#popular-beach-container a,
+.popular-beach-container a,
 .beach-container a {
   color: $white;
-  
+
   &:hover {
     opacity: 0.9;
     text-decoration: none;
@@ -160,14 +166,11 @@ hr {
   clear: both;
 }
 
-#search-form {
+.search-form {
   border: transparent;
   color: $white;
 
   input {
     background: rgba(0, 0, 0, 0.1);
-    ::-webkit-input-placeholder {
-      color: $white;
-    }
   }
 }
