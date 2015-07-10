@@ -10,13 +10,13 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 gem 'responders'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'fog'
 gem 'dotenv-rails'
 gem 'carrierwave_direct'
+gem 'faker'
 
 group :production do
   gem 'puma'
@@ -36,7 +36,6 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'factory_girl'
-  gem 'faker'
   gem 'factory_girl_rails'
   gem 'valid_attribute'
   gem 'pry-rails'
