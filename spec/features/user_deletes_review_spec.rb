@@ -12,7 +12,7 @@ feature "user deletes an existing beach", %{
     beach = review.beach
     sign_in(user)
 
-    click_link beach.name
+    first(:link, beach.name).click
 
     click_link "Delete Review"
 
@@ -26,7 +26,7 @@ feature "user deletes an existing beach", %{
     beach = review.beach
     sign_in(user)
 
-    click_link beach.name
+    first(:link, beach.name).click
 
     expect(page).to_not have_content("Delete Review")
   end

@@ -40,7 +40,7 @@ class UpvotesController < ApplicationController
         format.json { render json: @upvote }
       end
     else
-      flash[:notice] = "Upvote not deleted."
+      flash[:danger] = "Upvote not deleted."
       redirect_to @beach
     end
   end

@@ -11,20 +11,29 @@ feature 'admin deletes a beach', %{
   # [x] If I delete a beach, I also delete all of its reviews and amenities
   #     associations
 
-  scenario 'admin deletes a beach' do
-    beach = FactoryGirl.create(:beach)
-    amenity = FactoryGirl.create(:amenity)
-    FactoryGirl.create(:beach_amenity, beach: beach, amenity: amenity)
+  describe "admin delete's user's account" do
+    let!(:beach) { FactoryGirl.create(:beach) }
+    let!(:beach2) { FactoryGirl.create(:beach) }
+    let!(:beach3) { FactoryGirl.create(:beach) }
 
-    admin = FactoryGirl.create(:user, role: "admin")
-    sign_in(admin)
+    scenario 'admin deletes a beach' do
+      beach_amenity = FactoryGirl.create(:beach_amenity)
+      beach = beach_amenity.beach
 
-    click_link beach.name
-    click_on "Delete Beach"
+      admin = FactoryGirl.create(:user, role: "admin")
 
-    expect(page).to have_content('Beach deleted successfully')
-    expect(page).to_not have_content(beach.name)
-    expect(Beach.count).to eq(0)
-    expect(BeachAmenity.count).to eq(0)
+      sign_in(admin)
+
+      visit beaches_path
+
+      first(:link, beach.name).click
+
+      click_on "Delete Beach"
+
+      expect(page).to have_content('Beach deleted successfully')
+      expect(page).to_not have_content(beach.name)
+      expect(Beach.count).to eq(3)
+      expect(BeachAmenity.count).to eq(0)
+    end
   end
 end

@@ -12,24 +12,30 @@ feature 'user registers', %{
   # * If I don't specify the required information, I am presented with
   #   an error message
 
-  scenario 'provide valid registration information' do
-    visit new_user_registration_path
+  describe "user signs in" do
+    let!(:beach) { FactoryGirl.create(:beach) }
+    let!(:beach2) { FactoryGirl.create(:beach) }
+    let!(:beach3) { FactoryGirl.create(:beach) }
 
-    fill_in 'Email', with: 'john@example.com'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
+    scenario 'provide valid registration information' do
+      visit new_user_registration_path
 
-    click_button 'Sign up'
+      fill_in 'Email', with: 'john@example.com'
+      fill_in 'Password', with: 'password'
+      fill_in 'Password confirmation', with: 'password'
 
-    expect(page).to have_content('Welcome! You have signed up successfully.')
-    expect(page).to have_content('Sign Out')
-  end
+      click_button 'Sign up'
 
-  scenario 'provide invalid registration information' do
-    visit new_user_registration_path
+      expect(page).to have_content('Welcome! You have signed up successfully.')
+      expect(page).to have_content('Sign Out')
+    end
 
-    click_button 'Sign up'
-    expect(page).to have_content("can't be blank")
-    expect(page).to_not have_content('Sign Out')
+    scenario 'provide invalid registration information' do
+      visit new_user_registration_path
+
+      click_button 'Sign up'
+      expect(page).to have_content("can't be blank")
+      expect(page).to_not have_content('Sign Out')
+    end
   end
 end

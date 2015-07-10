@@ -12,37 +12,45 @@ feature 'user updates account information', %{
   # [x] If I don't specify the required information, I am presented with
   #     an error message
 
-  scenario 'provide valid registration information' do
-    user = FactoryGirl.create(:user)
-    sign_in(user)
+  describe "user signs in" do
+    let!(:beach) { FactoryGirl.create(:beach) }
+    let!(:beach2) { FactoryGirl.create(:beach) }
+    let!(:beach3) { FactoryGirl.create(:beach) }
 
-    click_link 'Change Account Information'
+    scenario 'provide valid registration information' do
+      user = FactoryGirl.create(:user)
+      sign_in(user)
 
-    fill_in 'Email', with: 'john@example.com'
-    fill_in 'Password', with: 'fakefake'
-    fill_in 'Password confirmation', with: 'fakefake'
-    fill_in 'Current password', with: 'password'
+      click_link 'My Profile'
 
-    click_button 'Update'
+      fill_in 'Email', with: 'john@example.com'
+      fill_in 'Password', with: 'fakefake'
+      fill_in 'Password confirmation', with: 'fakefake'
+      fill_in 'Current password', with: 'password'
 
-    expect(page).to have_content('Your account has been updated successfully.')
-    expect(page).to have_content('Sign Out')
-  end
+      click_button 'Update'
 
-  scenario 'provides invalid registration information' do
-    user = FactoryGirl.create(:user)
-    sign_in(user)
+      expect(page).to have_content(
+        'Your account has been updated successfully.'
+      )
+      expect(page).to have_content('Sign Out')
+    end
 
-    click_link 'Change Account Information'
+    scenario 'provides invalid registration information' do
+      user = FactoryGirl.create(:user)
+      sign_in(user)
 
-    fill_in 'Email', with: 'john@example.com'
-    fill_in 'Password', with: 'fake'
-    fill_in 'Password confirmation', with: 'fake'
-    fill_in 'Current password', with: 'password'
+      click_link 'My Profile'
 
-    click_button 'Update'
+      fill_in 'Email', with: 'john@example.com'
+      fill_in 'Password', with: 'fake'
+      fill_in 'Password confirmation', with: 'fake'
+      fill_in 'Current password', with: 'password'
 
-    expect(page).to have_content('Password is too short')
-    expect(page).to have_content('Sign Out')
+      click_button 'Update'
+
+      expect(page).to have_content('Password is too short')
+      expect(page).to have_content('Sign Out')
+    end
   end
 end

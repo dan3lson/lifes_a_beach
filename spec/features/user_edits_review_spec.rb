@@ -13,7 +13,7 @@ feature 'user edits a review they created', %{
       beach = review.beach
       sign_in(user)
 
-      click_link beach.name
+      first(:link, beach.name).click
       click_link 'Edit Review'
 
       select 'Good - 4', from: 'Rating'
@@ -30,15 +30,13 @@ feature 'user edits a review they created', %{
       beach = review.beach
       sign_in(user)
 
-      click_link beach.name
+      first(:link, beach.name).click
       click_link 'Edit Review'
 
       select '', from: 'Rating'
-      fill_in "Description", with: "Da best beach ever"
       click_button "Submit"
 
       expect(page).to_not have_content("Review updated successfully")
-      expect(page).to have_content("Review not updated successfully")
       expect(page).to have_content("can\'t be blank")
     end
 
@@ -48,7 +46,7 @@ feature 'user edits a review they created', %{
       beach = review.beach
       sign_in(user)
 
-      click_link beach.name
+      first(:link, beach.name).click
 
       expect(page).to have_content('Edit Review')
       expect(page).to have_content('Delete Review')
@@ -60,7 +58,7 @@ feature 'user edits a review they created', %{
       beach = review.beach
       sign_in(user)
 
-      click_link beach.name
+      first(:link, beach.name).click
 
       expect(page).to_not have_content('Edit Review')
       expect(page).to_not have_content('Delete Review')
