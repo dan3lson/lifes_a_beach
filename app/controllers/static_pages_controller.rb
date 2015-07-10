@@ -6,4 +6,7 @@ class StaticPagesController < ApplicationController
       @random_beaches << Beach.all.sample
     end
   end
+
+  def about
+  end
 end
