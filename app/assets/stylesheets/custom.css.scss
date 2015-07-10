@@ -91,7 +91,8 @@ body {
 footer {
   background: $beach-blue;
 
-  a, span {
+  a,
+  span {
     color: $white;
     opacity: 0.8;
   }
@@ -107,7 +108,7 @@ footer {
 }
 
 hr {
-  border-color: lighten(gray, 30%);
+  border-color: lighten($light_gray, 30%);
 }
 
 .popular-beach-container a,
@@ -125,23 +126,23 @@ hr {
 }
 
 .beach-index-location-header {
-  color: white;
+  color: $white;
   font-size: 0.6em;
   opacity: 0.7;
 }
 
 .text-muted {
   margin-top: 0;
+
   a {
     color: $beach-blue;
   }
-}
 
-.text-muted a:hover {
-  color: lighten($beach-blue, 20%);
-  text-decoration: none;
+  a:hover {
+    color: lighten($beach-blue, 20%);
+    text-decoration: none;
+  }
 }
-
 
 .header.clearfix {
   margin-bottom: 20px;
@@ -166,11 +167,25 @@ hr {
   clear: both;
 }
 
-.search-form {
+#search-form {
   border: transparent;
   color: $white;
 
   input {
     background: rgba(0, 0, 0, 0.1);
+  }
+  ::-webkit-input-placeholder {
+     color: $white;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+     color: $white;
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+     color: $white;
+  }
+
+  :-ms-input-placeholder {
+     color: $white;
   }
 }
