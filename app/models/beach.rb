@@ -15,6 +15,14 @@ class Beach < ActiveRecord::Base
   validates :description, presence: true
   validates :user_id, presence: true
 
+  def total_score
+    total_score = 0
+    self.reviews.each do |review|
+      total_score += review.score
+    end
+    return total_score
+  end
+
   def self.search(query)
     if query.split.size == 1
       @beaches = Beach.joins(:amenities).where(
