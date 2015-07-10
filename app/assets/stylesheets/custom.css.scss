@@ -1,8 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-$light_gray: #F2F2F2;
-$white: #FFF;
+$light-gray: #f2f2f2;
+$white: $white;
 $beach-blue: #5bc0de;
 
 body {
@@ -10,23 +10,22 @@ body {
 }
 
 #index-background-header {
-  text-align: center;
-  padding-top: 300px;
+  color: $white;
   font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  color: #FFF;
   font-size: 5em;
   font-weight: bold;
+  padding-top: 300px;
+  text-align: center;
 }
 
-#search-bar-container .well{
-  background: #000;
+#search-bar-container .well {
   background: rgba(0, 0, 0, 0.1);
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 0;
-  left: 0;
-  right: 0;
   border-color: transparent;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0;
+  position: absolute;
+  right: 0;
 }
 
 .columns {
@@ -41,8 +40,8 @@ body {
   h1 {
     color: inherit;
   }
-  & > * {
-    color: #FFF;
+  * {
+    color: $white;
   }
 }
 
@@ -50,7 +49,7 @@ body {
 
 #beach-snapshot {
   span {
-    color: darken($light_gray, 30%);
+    color: darken($light-gray, 30%);
     padding-bottom: 100px;
   }
   h1 {
@@ -76,9 +75,9 @@ body {
 }
 
 .col-centered {
-  display:inline-block;
-  float:none;
-  text-align:center;
+  display: inline-block;
+  float: none;
+  text-align: center;
 }
 
 .section-title {
@@ -105,8 +104,10 @@ hr {
   border-color: lighten(gray, 30%);
 }
 
-#popular-beach-container a, .beach-container a {
+#popular-beach-container a,
+.beach-container a {
   color: $white;
+  
   &:hover {
     opacity: 0.9;
     text-decoration: none;
@@ -122,7 +123,7 @@ hr {
   font-size: 0.6em;
   opacity: 0.7;
 }
-s
+
 .text-muted {
   margin-top: 0;
   a {
@@ -147,6 +148,7 @@ s
 #create-a-beach-btn a {
   border: none;
   color: $white;
+
   &:hover {
     background: $beach-blue;
     border: none;
@@ -161,6 +163,7 @@ s
 #search-form {
   border: transparent;
   color: $white;
+
   input {
     background: rgba(0, 0, 0, 0.1);
     ::-webkit-input-placeholder {
