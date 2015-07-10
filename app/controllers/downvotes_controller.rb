@@ -7,30 +7,38 @@ class DownvotesController < ApplicationController
         review_id: @review.id,
         user_id: current_user.id
       )
-      @review.score -= 1
-
-      if @downvote.save && @review.save
-        flash[:notice] = "Downvote created successfully."
-        redirect_to @beach
-      else
-        flash[:notice] = "Downvote not created successfully."
-        render :new
+      respond_to do |format|
+        if @downvote.save
+          format.html do
+            redirect_to :back,
+                        notice: "Downvote created successfully."
+          end
+          format.json { render json: @downvote }
+        else
+          flash[:notice] = "Downvote not created successfully."
+          format.html { redirect_to :back }
+          format.json do
+            render json: @downvote.errors,
+                   status: :unprocessable_entity
+          end
+        end
       end
     end
   end
 
   def destroy
     @review = Review.find(params[:review_id])
+    @beach = @review.beach
     @downvote = Downvote.find_by(
       user_id: current_user.id,
       review_id: @review.id
     )
-    @beach = @review.beach
-    @review.score += 1
-
-    if @downvote.destroy && @review.save
+    if @downvote.destroy
       flash[:notice] = "Downvote deleted successfully."
-      redirect_to @beach
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js { render json: @downvote }
+      end
     else
       flash[:notice] = "Downvote not deleted."
       redirect_to @beach

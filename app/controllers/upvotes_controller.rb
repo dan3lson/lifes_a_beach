@@ -7,27 +7,38 @@ class UpvotesController < ApplicationController
         review_id: @review.id,
         user_id: current_user.id
       )
-      @review.score += 1
-
-      if @upvote.save && @review.save
-        flash[:notice] = "Upvote created successfully."
-        redirect_to @beach
-      else
-        flash[:notice] = "Upvote not created successfully."
-        render :new
+      respond_to do |format|
+        if @upvote.save
+          format.html do
+            redirect_to :back,
+                        notice: "Upvote created successfully."
+          end
+          format.json { render json: @upvote }
+        else
+          flash[:notice] = "Upvote not created successfully."
+          format.html { redirect_to :back }
+          format.json do
+            render json: @upvote.errors,
+                   status: :unprocessable_entity
+          end
+        end
       end
     end
   end
 
   def destroy
     @review = Review.find(params[:review_id])
-    @upvote = Upvote.find_by(user_id: current_user.id, review_id: @review.id)
     @beach = @review.beach
-    @review.score -= 1
-
-    if @upvote.destroy && @review.save
+    @upvote = Upvote.find_by(
+      user_id: current_user.id,
+      review_id: @review.id
+     )
+    if @upvote.destroy
       flash[:notice] = "Upvote deleted successfully."
-      redirect_to @beach
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.json { render json: @upvote }
+      end
     else
       flash[:notice] = "Upvote not deleted."
       redirect_to @beach

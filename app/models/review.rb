@@ -11,4 +11,16 @@ class Review < ActiveRecord::Base
     scope: :beach,
     message: "can only submit one review for a beach."
   }
+
+  def score
+    upvotes.count - downvotes.count
+  end
+
+  def upvotes_from(user)
+    upvotes.find_by(user_id: user.id)
+  end
+
+  def downvotes_from(user)
+    downvotes.find_by(user_id: user.id)
+  end
 end

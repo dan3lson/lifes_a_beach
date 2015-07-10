@@ -10,7 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'rails_12factor'
+
 gem 'responders'
 gem 'kaminari'
 gem 'carrierwave'
@@ -18,7 +18,15 @@ gem 'fog'
 gem 'dotenv-rails'
 gem 'carrierwave_direct'
 
-gem 'puma', group: [:production]
+group :production do
+  gem 'puma'
+  gem 'rails_12factor'
+end
+
+group :test do
+  gem 'poltergeist'
+  gem 'database_cleaner'
+end
 
 group :development, :test do
   gem 'byebug'

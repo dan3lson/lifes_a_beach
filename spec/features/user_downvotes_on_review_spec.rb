@@ -7,37 +7,34 @@ feature 'user downvotes on a review', %{
 } do
 
   describe 'User downvotes on a review' do
-    scenario 'user clicks downvote' do
+    scenario 'user clicks downvote', js: true do
       review = FactoryGirl.create(:review)
       beach = review.beach
       user = review.user
 
       sign_in(user)
 
-      visit '/'
-      click_on beach.name
-      click_on 'Downvote'
+      visit beach_path(beach)
 
-      expect(page).to have_content("Downvote created successfully.")
-      expect(page).to_not have_content("Downvote not created successfully.")
-      review.reload
+      click_on 'Downvote'
+      sleep 1
+
       expect(review.score).to eq(-1)
     end
-    scenario 'user clicks remove downvote' do
+    scenario 'user clicks remove downvote', js: true do
       review = FactoryGirl.create(:review)
       beach = review.beach
       user = review.user
 
       sign_in(user)
 
-      visit '/'
-      click_on beach.name
-      click_on 'Downvote'
-      click_on 'Delete Downvote'
+      visit beach_path(beach)
 
-      expect(page).to have_content("Downvote deleted successfully.")
-      expect(page).to_not have_content("Downvote created successfully.")
-      review.reload
+      click_on 'Downvote'
+      sleep 1
+      click_on 'Delete Downvote'
+      sleep 1
+
       expect(review.score).to eq(0)
     end
   end

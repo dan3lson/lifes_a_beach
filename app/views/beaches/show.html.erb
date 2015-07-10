@@ -1,37 +1,16 @@
-<h1>
-  <%= @beach.name %>
-</h1>
-<p>
-    <%= @beach.description %>
-</p>
-<p>
-    <%= @beach.street1 %>
-</p>
-<p>
-    <%= @beach.street2 %>
-</p>
-<p>
-    <%= @beach.city %>
-</p>
-<p>
-    <%= @beach.state %>
-</p>
-<p>
-    <%= @beach.zip %>
-</p>
-<p>
-    <%= @beach.entrance_fee %>
-</p>
-<p>
-    <%= image_tag(@beach.picture_url) %>
-</p>
-<p>
-    <% @beach.amenities.each do |amenity| %>
+<h1><%= @beach.name %></h1>
+<p><%= @beach.description %></p>
+<p><%= @beach.street1 %></p>
+<p><%= @beach.street2 %></p>
+<p><%= @beach.city %></p>
+<p><%= @beach.state %></p>
+<p><%= @beach.zip %></p>
+<p><%= @beach.entrance_fee %></p>
+<p><%= image_tag(@beach.picture_url) %></p>
+<p><% @beach.amenities.each do |amenity| %>
       <%= amenity.name %>
       <br/>
-    <% end %>
-</p>
-
+    <% end %></p>
 <br/>
 <% if @reviews.first.nil? %>
   No reviews exist.
@@ -44,14 +23,27 @@
     <%= link_to "Add a Review", new_beach_review_path(@beach) %>
   <% end %>
   <% @reviews.each do |review| %>
+    <% @review = review %>
     <br/>
-    Rating: <%= review.rating %>
+      Rating: <%= review.rating %>
     <br/>
-    Description: <%= review.description %>
+      Description: <%= review.description %>
     <br/>
-    Score: <%= review.score %>
+    <div class='review' >Score: <div id='review-<%= @review.id %>-score'><%= @review.score %></div>
+    <% if user_signed_in? %>
+          <%= link_to "Upvote", review_upvotes_path(review),
+          method: :post,
+          class: "review-#{@review.id} upvote",
+          id: "upvote-#{review.id}" %>
+        <br/>
+          <%= link_to "Downvote", review_downvotes_path(review),
+          method: :post,
+          class: "review-#{@review.id} downvote",
+          id: "downvote-#{review.id}" %>
+      <br/>
+    <% end %>
     <br/>
-
+    </div>
     <% if user_signed_in? && review.user == current_user %>
       <li><%= link_to "Edit Review", edit_beach_review_path(@beach, review)%></li>
     <% end %>
@@ -62,30 +54,8 @@
         method: :delete, data: { confirm: "Are you sure?" }
       %></li>
     <% end %>
-
-    <% if user_signed_in? %>
-      <% if review.upvotes.find_by(user_id: current_user.id) %>
-        <%=
-          link_to "Delete Upvote", review_upvote_path(review, Upvote.all.first),
-          method: :delete,
-          class: "btn btn-small btn-danger form-control"
-        %>
-      <% elsif review.downvotes.find_by(user_id: current_user.id) %>
-        <%=
-          link_to "Delete Downvote", review_downvote_path(review, Downvote.all.first),
-          method: :delete,
-          class: "btn btn-small btn-danger form-control"
-        %>
-      <% else %>
-        <%= link_to "Upvote", review_upvotes_path(review), method: :post %>
-        |
-        <%= link_to "Downvote", review_downvotes_path(review), method: :post %>
-      <% end %>
-    <% end %>
   <% end %>
-
   <%= paginate @reviews %>
-
   <hr/>
 <% end %>
 <%= link_to "All Beaches", beaches_path %>
@@ -98,6 +68,5 @@
   <%= link_to "Delete Beach", beach_path(@beach),
     class: "btn btn-small btn-danger form-control",
     # Why does this delete-alert pop up twice?
-    method: :delete, data: { confirm: "Are you sure?" }
-  %>
+    method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
