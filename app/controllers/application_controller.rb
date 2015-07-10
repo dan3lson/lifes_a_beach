@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
       "http://www.inparkmagazine.com/wp-content/uploads/2014/01/1524109" <<
         "_10152500433793378_910646857_o.jpg",
       "https://boonstoon.files.wordpress.com/2012/05/beach1.jpg",
-        "http://www.vosizneias.com/wp-content/uploads/2015/06/miamb.jpg",
+      "http://www.vosizneias.com/wp-content/uploads/2015/06/miamb.jpg",
       "http://dsx.weather.com//util/image/w/cablebeach.jpg?v=at&w=980&h=" <<
         "551&api=7db9fe61-7414-47b5-9871-e17d87b8b6a0",
       "http://dsx.weather.com//util/image/w/bestbeaches_glyfadacorfu.jpg?" <<

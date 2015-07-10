@@ -17,9 +17,10 @@ body {
   font-size: 5em;
   font-weight: bold;
 }
+
 #search-bar-container .well{
   background: #000;
-  background: rgba(0,0,0,.1);
+  background: rgba(0, 0, 0, 0.1);
   position: absolute;
   bottom: 0;
   margin-bottom: 0;
@@ -27,21 +28,25 @@ body {
   right: 0;
   border-color: transparent;
 }
+
 .columns {
   padding-top: 150px;
 }
+
 .index-containers {
   margin-top: 100px;
+  p {
+    color: inherit;
+  }
+  h1 {
+    color: inherit;
+  }
+  & > * {
+    color: #FFF;
+  }
 }
-.index-containers > * {
-  color: #FFF;
-}
-.index-containers > h1 {
-  color: inherit;
-}
-.index-containers > p {
-  color: inherit;
-}
+
+
 
 #beach-snapshot {
   span {
@@ -71,9 +76,9 @@ body {
 }
 
 .col-centered {
-    display:inline-block;
-    float:none;
-    text-align:center;
+  display:inline-block;
+  float:none;
+  text-align:center;
 }
 
 .section-title {
@@ -85,7 +90,7 @@ footer {
   background: $beach-blue;
   a, span {
     color: $white;
-    opacity: .8;
+    opacity: 0.8;
   }
   a:hover {
     color: $white;
@@ -103,7 +108,7 @@ hr {
 #popular-beach-container a, .beach-container a {
   color: $white;
   &:hover {
-    opacity: .9;
+    opacity: 0.9;
     text-decoration: none;
   }
 }
@@ -114,21 +119,22 @@ hr {
 
 .beach-index-location-header {
   color: white;
-  opacity: .7;
-  font-size: .6em;
+  font-size: 0.6em;
+  opacity: 0.7;
 }
-
+s
 .text-muted {
   margin-top: 0;
-}
-
-.text-muted a {
-  color: $beach-blue;
-  &:hover {
-    color: lighten($beach-blue, 20%);
-    text-decoration: none;
+  a {
+    color: $beach-blue;
   }
 }
+
+.text-muted a:hover {
+  color: lighten($beach-blue, 20%);
+  text-decoration: none;
+}
+
 
 .header.clearfix {
   margin-bottom: 20px;
@@ -155,11 +161,10 @@ hr {
 #search-form {
   border: transparent;
   color: $white;
-}
-
-#search-form input {
-  background: rgba(0, 0, 0, .1);
-  ::-webkit-input-placeholder {
-     color: $white;
+  input {
+    background: rgba(0, 0, 0, 0.1);
+    ::-webkit-input-placeholder {
+      color: $white;
+    }
   }
 }
