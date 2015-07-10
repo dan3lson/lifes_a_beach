@@ -41,6 +41,8 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'pry-rails'
   gem 'shoulda-matchers', require: false
+  gem 'nokogiri'
+  gem 'httparty'
 end
 
 gem 'coveralls', group: [:test], require: false
