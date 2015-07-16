@@ -56,20 +56,20 @@ In your browser, visit:
 localhost:3000
 ```
 
-After signing up, users can add new beaches, submit reviews, and upvote and downvote reviews.
+Guests can view beaches and reviews whereas registered users can add new beaches, submit reviews, and upvote / downvote reviews.
 
 **[Back to top](#table-of-contents)**
 
-## Demo
+## View Live Website
 
-- [Website](http://lifesabeach.herokuapp.com)
+- [Life's a Beach](http://lifesabeach.herokuapp.com)
 
 **[Back to top](#table-of-contents)**
 
 ## Contributors
 
 Core contributors for this project are:
-- [dan3leson](https://github.com/dan3lson)
+- [dan3lson](https://github.com/dan3lson)
 - [thomascchen](https://github.com/thomascchen)
 - [brea9482](https://github.com/brea9482)
 - [jford8820](https://github.com/jford8820)
